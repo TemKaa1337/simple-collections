@@ -9,7 +9,7 @@ class ArrayCollection
         $this->collection = $array;
     }
 
-    public function where(string $field, mixed $value) : self
+    public function where(string $field, mixed $value): self
     {
         $result = [];
 
@@ -24,7 +24,7 @@ class ArrayCollection
         return $this;
     }
 
-    public function whereIn(string $field, array $values) : self
+    public function whereIn(string $field, array $values): self
     {
         $result = [];
 
@@ -39,17 +39,17 @@ class ArrayCollection
         return $this;
     }
 
-    public function isEmpty() : bool
+    public function isEmpty(): bool
     {
         return count($this->collection) === 0;
     }
 
-    public function isNotEmpty() : bool
+    public function isNotEmpty(): bool
     {
         return count($this->collection) !== 0;
     }
 
-    public function map(callable $fn) : array
+    public function map(callable $fn): array
     {
         $result = [];
 
@@ -60,6 +60,22 @@ class ArrayCollection
         $this->collection = $result;
 
         return $this->all();
+    }
+
+    public function sort(string $field, string $sortMethod = 'asc'): self
+    {
+        $fn = fn ($a, $b) => $sortMethod === 'asc'
+                               ? $a[$field] > $b[$field]
+                               : $a[$field] < $b[$field];
+                            
+        return $this->sortBy($fn);
+    }
+
+    public function sortBy(callable $fn): self
+    {
+        usort($this->collection, $fn);
+
+        return $this;
     }
 
     public function all() : array
