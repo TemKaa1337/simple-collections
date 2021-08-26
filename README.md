@@ -1,1 +1,1 @@
-# This is a simple array and object collections that provide convinient methods to manipulate collections; 
+# These are simple array and object collections that provide convinient methods to manipulate collections; 
