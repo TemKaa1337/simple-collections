@@ -49,6 +49,19 @@ class ArrayCollection
         return count($this->collection) !== 0;
     }
 
+    public function map(callable $fn) : array
+    {
+        $result = [];
+
+        foreach ($this->collection as $element) {
+            $result[] = $fn($element);
+        }
+
+        $this->collection = $result;
+
+        return $this->all();
+    }
+
     public function all() : array
     {
         return $this->collection;
