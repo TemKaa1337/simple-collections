@@ -9,12 +9,16 @@ class ArrayCollection
         $this->collection = $array;
     }
 
+    //TODO : add operators <=>
     public function where(string $field, mixed $value): self
     {
         $result = [];
 
         foreach ($this->collection as $element) {
-            if ($element[$field] === $value) {
+            if (
+                isset($element[$field])
+                && $element[$field] === $value
+            ) {
                 $result[] = $element;
             }
         }
@@ -29,7 +33,10 @@ class ArrayCollection
         $result = [];
 
         foreach ($this->collection as $element) {
-            if (in_array($element[$field], $values)) {
+            if (
+                isset($element[$field])
+                && in_array($element[$field], $values)
+            ) {
                 $result[] = $element;
             }
         }
@@ -64,9 +71,13 @@ class ArrayCollection
 
     public function sort(string $field, string $sortMethod = 'asc'): self
     {
-        $fn = fn ($a, $b) => $sortMethod === 'asc'
-                               ? $a[$field] > $b[$field]
-                               : $a[$field] < $b[$field];
+        $fn = function ($a, $b) use ($field, $sortMethod) {
+            if (!isset($a[$field]) || !isset($b[$field])) return -1;
+            if ($a[$field] === $b[$field]) return 0;
+
+            if ($sortMethod === 'asc') return $a[$field] < $b[$field] ? 1 : -1;
+            else return $a[$field] > $b[$field] ? 1 : -1;
+        };
                             
         return $this->sortBy($fn);
     }
