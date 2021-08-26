@@ -1,5 +1,7 @@
 <?php declare(strict_types = 1);
 
+namespace Collections;
+
 class ArrayCollection
 {
     private array $collection;
@@ -78,14 +80,9 @@ class ArrayCollection
             if ($sortMethod === 'asc') return $a[$field] < $b[$field] ? 1 : -1;
             else return $a[$field] > $b[$field] ? 1 : -1;
         };
-                            
-        return $this->sortBy($fn);
-    }
 
-    public function sortBy(callable $fn): self
-    {
         usort($this->collection, $fn);
-
+                            
         return $this;
     }
 
