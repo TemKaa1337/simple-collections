@@ -1,4 +1,4 @@
-[header] These are simple array and object collections that provide convinient methods to manipulate collections;
+# These are simple array and object collections that provide convinient methods to manipulate collections;
 To install this package type ```composer require temkaa-simple-collections``` in your project root directory.
 ## Quickstart
 ```
@@ -42,7 +42,9 @@ class SomeClass
 Using this method you can retrieve array elements with specified value.
 `$collection->where('id', 2)`
 ### where(string $fieldName, string $operator, mixed $value): Collection
-Using this method you can retrieve array elements with operator rule. Allowed operators:
+Using this method you can retrieve array elements with operator rule. 
+`$collection->where('id', '<', 5)`
+Allowed operators:
 - `==`
 - `<>`
 - `<`
@@ -51,11 +53,10 @@ Using this method you can retrieve array elements with operator rule. Allowed op
 - `>=`
 - `===`
 - `!==`
-`$collection->where('id', '<', 5)`
 ### where(array $options)
-Using this method you can specify array of rules, like in first two examples given. This is equivalent to:
-`$collection->where(...)->where(...)`
-```$collection->where([
+Using this method you can specify array of rules, like in first two examples given. This is equivalent to calling the previous method.
+```
+$collection->where([
     ['id', '>', 10],
     ['value', '===', 15]
 ])
