@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Temkaa\Exceptions;
+namespace SimpleCollections\Exceptions;
 
 use Exception;
 

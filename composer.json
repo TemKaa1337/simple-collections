@@ -18,7 +18,7 @@
             "src/"
         ],
         "psr-4": {
-            "Temkaa\\": "src/"
+            "SimpleCollections\\": "src/"
         }
     },
     "require-dev": {

@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace Temkaa\Collections;
+namespace SimpleCollections\Collections;
 
-use Temkaa\Exceptions\InvalidOperatorException;
+use SimpleCollections\Exceptions\InvalidOperatorException;
 
 class ObjectCollection
 {
