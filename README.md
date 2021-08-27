@@ -42,9 +42,9 @@ class SomeClass
 Using this method you can retrieve array elements with specified value.
 ```$collection->where('id', 2)```
 ### where(string $fieldName, string $operator, mixed $value): Collection
-Using this method you can retrieve array elements with operator rule. 
-```$collection->where('id', '<', 5)```
-Allowed operators:
+Using this method you can retrieve array elements with operator rule.  
+```$collection->where('id', '<', 5)```  
+Allowed operators:  
 - `==`
 - `<>`
 - `<`
