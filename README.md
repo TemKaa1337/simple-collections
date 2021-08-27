@@ -40,10 +40,10 @@ class SomeClass
 ## Functionality
 ### where(string $fieldName, mixed $fieldValue): Collection
 Using this method you can retrieve array elements with specified value.
-`$collection->where('id', 2)`
+```$collection->where('id', 2)```
 ### where(string $fieldName, string $operator, mixed $value): Collection
 Using this method you can retrieve array elements with operator rule. 
-`$collection->where('id', '<', 5)`
+```$collection->where('id', '<', 5)```
 Allowed operators:
 - `==`
 - `<>`
@@ -63,18 +63,18 @@ $collection->where([
 ```
 ### whereIn(string $fieldName, array $values)
 Using this method you can get array of elements, which specified field value is in given array
-`$collection->whereIn('id', [1, 2, 3])`
+```$collection->whereIn('id', [1, 2, 3])```
 ### map(callable $function)
 Using this function you can map through the array and cast the fiven function to all elements
-`$collection->map(fn ($element) => $element['id']`
+```$collection->map(fn ($element) => $element['id']```
 ### sort(string $field, string $sortMethod = 'asc')
 Using this method you can sort the array.
-`$collection->sort('id', 'desc')`
+```$collection->sort('id', 'desc')```
 ### isEmpty()
 Using this method you will know if the collection is empty.
-`$collection->isEmpty()`
+```$collection->isEmpty()```
 ### isNotEmpty
 This function is opposite to function `isEmpty`
-`$collection->isNotEmpty()`
+```$collection->isNotEmpty()```
 ### all()
 This method will return the result array
