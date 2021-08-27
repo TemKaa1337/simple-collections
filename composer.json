@@ -1,4 +1,18 @@
 {
+    "type": "package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Komarov Artem",
+            "email": "temkaawork@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "name": "temkaa/simple-collections",
+    "description": "These are simple array and object collections that provide convinient methods to manipulate them.",
+    "require": {
+        "php": ">=8.0"
+    },
     "autoload": {
         "classmap": [
             "src/"
