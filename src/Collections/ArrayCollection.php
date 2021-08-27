@@ -1,6 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace Collections;
+namespace App\Collections;
+
+use App\Exceptions\InvalidOperatorException;
 
 class ArrayCollection
 {
@@ -10,9 +12,71 @@ class ArrayCollection
     {
         $this->collection = $array;
     }
+    
+    protected function getOperatorComparison(
+        string $operator, 
+        mixed $firstOperand, 
+        mixed $secondOperand
+    ): bool
+    {
+        switch ($operator) {
+            case '==':  return $firstOperand == $secondOperand;
+            case '<>':  return $firstOperand != $secondOperand;
+            case '<':   return $firstOperand < $secondOperand;
+            case '>':   return $firstOperand > $secondOperand;
+            case '<=':  return $firstOperand <= $secondOperand;
+            case '>=':  return $firstOperand >= $secondOperand;
+            case '===': return $firstOperand === $secondOperand;
+            case '!==': return $firstOperand !== $secondOperand;
+        }
+    }
 
-    //TODO : add operators <=>
-    public function where(string $field, mixed $value): self
+    protected function operatorValid(mixed $operator): bool
+    {
+        return in_array($operator, [
+            '==', '<>', '<', '>', '<=',
+            '>=', '===', '!=='
+        ]);
+    }
+
+    public function where(
+        string|array $fieldOrArray,
+        mixed $valueOrOperator = null,
+        mixed $value = null
+    ) : self
+    {
+        if (is_array($fieldOrArray)) {
+            foreach ($fieldOrArray as $condition) {
+                $this->where(...$condition);
+            }
+        } else {
+            if (
+                !$this->operatorValid($valueOrOperator)
+                && $value === null
+            ) {
+                return $this->whereExactly($fieldOrArray, $valueOrOperator);
+            } else {
+                if ($this->operatorValid($valueOrOperator)) {
+                    $result = [];
+
+                    foreach ($this->collection as $element) {
+                        if (
+                            isset($element[$fieldOrArray])
+                            && $this->getOperatorComparison($valueOrOperator, $element[$fieldOrArray], $value)
+                        ) {
+                            $result[] = $element;
+                        }
+                    }
+
+                    $this->collection = $result;
+                } else throw new InvalidOperatorException('The provided compare operator is invalid');
+            }
+        }
+
+        return $this;
+    }
+
+    protected function whereExactly(string $field, mixed $value): self
     {
         $result = [];
 

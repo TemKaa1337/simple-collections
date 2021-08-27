@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use Collections\ArrayCollection;
+use App\Collections\ArrayCollection;
+use App\Exceptions\InvalidOperatorException;
 
 final class ArrayCollectionTest extends TestCase
 {
@@ -30,9 +31,8 @@ final class ArrayCollectionTest extends TestCase
         );
     }
 
-    public function testIsArrayMatchesAfterWhereMethod(): void
+    public function testIsArrayMatchesAfterWhereMethodWith2Arguments(): void
     {
-        
         $this->assertEquals(
             [
                 ['a' => 20, 'b' => 20],
@@ -48,6 +48,262 @@ final class ArrayCollectionTest extends TestCase
         $this->assertEquals(
             [],
             (new ArrayCollection($this->input))->where('c', 20)->all()
+        );
+    }
+
+    public function testIvalidOperandEquals(): void
+    {
+        $this->expectException(InvalidOperatorException::class);
+        (new ArrayCollection($this->input))->where('a', '=', 10)->all();
+    }
+
+    public function testInvalidOperatorNotEquals(): void
+    {
+        $this->expectException(InvalidOperatorException::class);
+        (new ArrayCollection($this->input))->where('a', '!=', 20)->where('a', '!=', 30)->all();
+    }
+
+    public function testIsArrayMatchesAfterWhereMethodWith3Arguments(): void
+    {
+        $this->assertEquals(
+            [
+                ['a' => 25, 'b' => 25],
+                ['a' => 30, 'b' => 5],
+                ['a' => 77, 'b' => 66]
+            ],
+            (new ArrayCollection($this->input))->where('a', '>', 20)->all()
+        );
+
+        $this->assertEquals(
+            [
+                ['a' => 25, 'b' => 25],
+                ['a' => 30, 'b' => 5],
+                ['a' => 77, 'b' => 66]
+            ],
+            (new ArrayCollection($this->input))->where('a', '>', 10)->where('a', '>', 20)->all()
+        );
+
+        $this->assertEquals(
+            [                
+                ['a' => 25, 'b' => 25],
+                ['a' => 30, 'b' => 5],
+                ['a' => 77, 'b' => 66]
+            ],
+            (new ArrayCollection($this->input))->where('a', '!==', 20)->all()
+        );
+
+        $this->assertEquals(
+            [                
+                ['a' => 25, 'b' => 25],
+                ['a' => 77, 'b' => 66]
+            ],
+            (new ArrayCollection($this->input))->where('a', '!==', 20)->where('a', '!==', 30)->all()
+        );
+
+        $this->assertEquals(
+            [],
+            (new ArrayCollection($this->input))->where('a', '<', 20)->all()
+        );
+
+        $this->assertEquals(
+            [                
+                ['a' => 20, 'b' => 20],
+                ['a' => 25, 'b' => 25],
+                ['a' => 20, 'b' => 2],
+                ['a' => 20, 'b' => 59],
+            ],
+            (new ArrayCollection($this->input))->where('a', '<', 70)->where('a', '<', 30)->all()
+        );
+
+        $this->assertEquals(
+            [                
+                ['a' => 20, 'b' => 20],
+                ['a' => 20, 'b' => 2],
+                ['a' => 20, 'b' => 59],
+            ],
+            (new ArrayCollection($this->input))->where('a', '==', 20)->all()
+        );
+
+        $this->assertEquals(
+            [                
+                ['a' => 20, 'b' => 20],
+            ],
+            (new ArrayCollection($this->input))->where('a', '==', 20)->where('b', '==', 20)->all()
+        );
+
+        $this->assertEquals(
+            [                
+                ['a' => 20, 'b' => 20],
+                ['a' => 20, 'b' => 2],
+                ['a' => 20, 'b' => 59],
+            ],
+            (new ArrayCollection($this->input))->where('a', '===', 20)->all()
+        );
+
+        $this->assertEquals(
+            [                
+                ['a' => 20, 'b' => 20],
+            ],
+            (new ArrayCollection($this->input))->where('a', '===', 20)->where('b', '===', 20)->all()
+        );
+
+        $this->assertEquals(
+            $this->input,
+            (new ArrayCollection($this->input))->where('a', '>=', 20)->all()
+        );
+
+        $this->assertEquals(
+            [
+                ['a' => 30, 'b' => 5],
+                ['a' => 77, 'b' => 66]
+            ],
+            (new ArrayCollection($this->input))->where('a', '>=', 20)->where('a', '>=', 30)->all()
+        );
+
+        $this->assertEquals(
+            [
+                ['a' => 20, 'b' => 20],
+                ['a' => 20, 'b' => 2],
+                ['a' => 20, 'b' => 59],
+            ],
+            (new ArrayCollection($this->input))->where('a', '<=', 20)->all()
+        );
+
+        $this->assertEquals(
+            [
+                ['a' => 20, 'b' => 20],
+                ['a' => 25, 'b' => 25],
+                ['a' => 30, 'b' => 5],
+                ['a' => 20, 'b' => 2],
+                ['a' => 20, 'b' => 59],
+            ],
+            (new ArrayCollection($this->input))->where('a', '<=', 68)->where('a', '<=', 30)->all()
+        );
+
+        $this->assertEquals(
+            [
+                ['a' => 25, 'b' => 25],
+                ['a' => 30, 'b' => 5],
+                ['a' => 77, 'b' => 66]
+            ],
+            (new ArrayCollection($this->input))->where('a', '<>', 20)->all()
+        );
+
+        $this->assertEquals(
+            [
+                ['a' => 25, 'b' => 25],
+                ['a' => 77, 'b' => 66]
+            ],
+            (new ArrayCollection($this->input))->where('a', '<>', 20)->where('a', '<>', 30)->all()
+        );
+    }
+
+    public function testIsArrayMatchesAfterWhereMethodWithNullArguments(): void
+    {
+        $this->assertEquals(
+            $this->input,
+            (new ArrayCollection($this->input))->where('a', '<>', null)->all()
+        );
+        
+        $this->assertEquals(
+            $this->input,
+            (new ArrayCollection($this->input))->where('a', '!==', null)->all()
+        );
+
+        $this->assertEquals(
+            [],
+            (new ArrayCollection($this->input))->where('a', null)->all()
+        );
+    }
+    
+    public function testIsArrayMatchesAfterWhereMethodWithArrayWith2Arguments(): void
+    {
+        $this->assertEquals(
+            [
+                ['a' => 20, 'b' => 20],
+                ['a' => 20, 'b' => 2],
+                ['a' => 20, 'b' => 59],
+            ],
+            (new ArrayCollection($this->input))->where([
+                ['a', 20]
+            ])->all()
+        );
+        
+        $this->assertEquals(
+            [
+                ['a' => 20, 'b' => 2]
+            ],
+            (new ArrayCollection($this->input))->where([
+                ['a', 20],
+                ['b', 2]
+            ])->all()
+        );
+        
+        $this->assertEquals(
+            [],
+            (new ArrayCollection($this->input))->where([
+                ['a', 20],
+                ['b', 2],
+                ['c', 10]
+            ])->all()
+        );
+    }
+
+    public function testIsArrayMatchesAfterWhereMethodWithArrayWith3Arguments(): void
+    {  
+        $this->assertEquals(
+            [],
+            (new ArrayCollection($this->input))->where([
+                ['a', '<', 30],
+                ['b', '<=', 58],
+                ['c', '>', 20]
+            ])->all()
+        );
+        
+        $this->assertEquals(
+            [
+                ['a' => 25, 'b' => 25],
+                ['a' => 30, 'b' => 5]
+            ],
+            (new ArrayCollection($this->input))->where([
+                ['a', '>', 20],
+                ['b', '<=', 25]
+            ])->all()
+        );
+        
+        $this->assertEquals(
+            [
+                ['a' => 20, 'b' => 20],
+                ['a' => 20, 'b' => 59],
+            ],
+            (new ArrayCollection($this->input))->where([
+                ['a', '===', 20],
+                ['b', '!==', 2]
+            ])->all()
+        );
+    }
+
+    public function testIsArrayMatchesAfterWhereMethodWithArrayWithMixedArguments(): void
+    {
+        $this->assertEquals(
+            [
+                ['a' => 20, 'b' => 20],
+                ['a' => 20, 'b' => 2]
+            ],
+            (new ArrayCollection($this->input))->where([
+                ['a', 20],
+                ['b', '<=', 20]
+            ])->all()
+        );
+        
+        $this->assertEquals(
+            [
+                ['a' => 77, 'b' => 66]
+            ],
+            (new ArrayCollection($this->input))->where([
+                ['a', '>', 20],
+                ['b', 66]
+            ])->all()
         );
     }
 
@@ -123,18 +379,4 @@ final class ArrayCollectionTest extends TestCase
             (new ArrayCollection($this->input))->where('a', 20)->sort('b', 'desc')->all()
         );
     }
-
-    public function testIsArrayWithGivenValueExistsAndSortedByCallback(): void
-    {
-        $this->assertEquals(
-            [
-                ['a' => 20, 'b' => 59]
-            ],
-            (new ArrayCollection($this->input))->where('a', 20)->sortBy(fn ($element) => $element['b'] > 30)->all()
-        );
-    }
-    // public function test(): void
-    // {
-    //     (new ArrayCollection($array))->where('a', 20)->sortBy(fn ($a, $b) => $a['c'] > $b['c'])->all()
-    // }
 }
