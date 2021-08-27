@@ -53,7 +53,7 @@ Allowed operators:
 - `===`
 - `!==`  
 ```$collection->where('id', '<', 5)```  
-### where(array $options)
+### where(array $options): Collection
 Using this method you can specify array of rules, like in first two examples given. This is equivalent to calling the previous method.
 ```
 $collection->where([
@@ -61,20 +61,20 @@ $collection->where([
     ['value', '===', 15]
 ])
 ```
-### whereIn(string $fieldName, array $values)
+### whereIn(string $fieldName, array $values): Collection
 Using this method you can get array of elements, which specified field value is in given array.  
 ```$collection->whereIn('id', [1, 2, 3])```  
-### map(callable $function)
+### map(callable $function): array
 Using this function you can map through the array and cast the fiven function to all elements.  
 ```$collection->map(fn ($element) => $element['id']```  
-### sort(string $field, string $sortMethod = 'asc')
+### sort(string $field, string $sortMethod = 'asc'): Collection
 Using this method you can sort the array.  
 ```$collection->sort('id', 'desc')```  
-### isEmpty()
+### isEmpty(): bool
 Using this method you will know if the collection is empty.  
 ```$collection->isEmpty()```  
-### isNotEmpty
+### isNotEmpty(): bool
 This function is opposite to function `isEmpty`.  
 ```$collection->isNotEmpty()```  
-### all()
+### all(): array
 This method will return the result array.
