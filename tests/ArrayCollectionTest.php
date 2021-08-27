@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use App\Collections\ArrayCollection;
-use App\Exceptions\InvalidOperatorException;
+use Temkaa\Collections\ArrayCollection;
+use Temkaa\Exceptions\InvalidOperatorException;
 
 final class ArrayCollectionTest extends TestCase
 {

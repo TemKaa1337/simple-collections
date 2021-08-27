@@ -1,9 +1,9 @@
 <?php declare(strict_types = 1);
 
-namespace App\Collections;
+namespace Temkaa\Collections;
 
-use App\Collections\ObjectCollection;
-use App\Collections\ArrayCollection;
+use Temkaa\Collections\ObjectCollection;
+use Temkaa\Collections\ArrayCollection;
 
 class Collection
 {
