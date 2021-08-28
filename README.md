@@ -77,7 +77,7 @@ Using this method you can get array of elements, which specified field value is 
 Using this function you can map through the array and cast the fiven function to all elements.  
 ```$collection->map(fn ($element) => $element['id']```  
 ### reject(callable $function): Collection
-Using this method you can delete items by any rule  
+Using this method you can delete items by any rule. In given example collection will delete all elements, which `id` parameter equals to `2`  
 ```$collection->reject(fn ($element) => $element['id'] === 2)```  
 ### sort(string $field, string $sortMethod = 'asc'): Collection
 Using this method you can sort the array.  
@@ -90,6 +90,7 @@ This function is opposite to function `isEmpty`.
 ```$collection->isNotEmpty()```  
 ### count(): array
 This method will return count of items in collection.  
-```$collection->count()```     
+```$collection->count()```  
 ### all(): array
 This method will return the result array.
+```$collection->all()```
