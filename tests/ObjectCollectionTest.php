@@ -415,4 +415,18 @@ final class ObjectCollectionTest extends TestCase
             (new ObjectCollection($this->input))->where('a', '>', 20)->reject(fn (object $elem): bool => $elem->a === 25)->all()
         );
     }
+    
+    public function testCheckIfCountOfCOllectionIsRight(): void
+    {
+        $this->setInput();
+        $this->assertEquals(
+            6,
+            (new ObjectCollection($this->input))->reject(fn (object $elem): bool => $elem->a === 10)->count()
+        );
+
+        $this->assertEquals(
+            4,
+            (new ObjectCollection($this->input))->where('a', '>', 20)->reject(fn (object $elem): bool => $elem->a === 25)->count()
+        );
+    }
 }

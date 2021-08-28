@@ -395,4 +395,17 @@ final class ArrayCollectionTest extends TestCase
             (new ArrayCollection($this->input))->where('a', '>', 20)->reject(fn (array $elem): bool => $elem['a'] === 25)->all()
         );
     }
+
+    public function testCheckIfCountOfCOllectionIsRight(): void
+    {
+        $this->assertEquals(
+            6,
+            (new ArrayCollection($this->input))->count()
+        );
+
+        $this->assertEquals(
+            2,
+            (new ArrayCollection($this->input))->where('a', '>', 20)->reject(fn (array $elem): bool => $elem['a'] === 25)->count()
+        );
+    }
 }

@@ -164,6 +164,11 @@ class ArrayCollection
         return $this;
     }
 
+    public function count(): int
+    {
+        return count($this->collection);
+    }
+
     public function all() : array
     {
         return $this->collection;
