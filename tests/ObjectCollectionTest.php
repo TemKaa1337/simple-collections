@@ -395,4 +395,24 @@ final class ObjectCollectionTest extends TestCase
             (new ObjectCollection($this->input))->where('a', 20)->sort('b', 'desc')->all()
         );
     }
+
+    public function testIsObjectArrayIsCorrectAfterRejecting(): void
+    {
+        $this->setInput();
+
+        $this->assertEquals(
+            $this->input,
+            (new ObjectCollection($this->input))->reject(fn (object $elem): bool => $elem->a === 10)->all()
+        );
+
+        $this->assertEquals(
+            [
+                $this->input[2],
+                $this->input[3],
+                $this->input[4],
+                $this->input[5]
+            ],
+            (new ObjectCollection($this->input))->where('a', '>', 20)->reject(fn (object $elem): bool => $elem->a === 25)->all()
+        );
+    }
 }

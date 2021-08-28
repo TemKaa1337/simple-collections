@@ -135,6 +135,20 @@ class ArrayCollection
         return $this->all();
     }
 
+    public function reject(callable $fn): self
+    {
+        $result = [];
+
+        foreach ($this->collection as $element) {
+            if (!$fn($element))
+                $result[] = $element;
+        }
+
+        $this->collection = $result;
+
+        return $this;
+    }
+
     public function sort(string $field, string $sortMethod = 'asc'): self
     {
         $fn = function ($a, $b) use ($field, $sortMethod) {

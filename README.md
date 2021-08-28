@@ -52,6 +52,7 @@ Using this method you can retrieve array elements with specified value.
 ### where(string $fieldName, string $operator, mixed $value): Collection
 Using this method you can retrieve array elements with operator rule.  
 If you will pass incorrent operator, the `InvalidOperatorException` will ge thrown.  
+Example: ```$collection->where('id', '<', 5)```   
 Allowed operators:  
 - `==`
 - `<>`
@@ -60,8 +61,7 @@ Allowed operators:
 - `<=`
 - `>=`
 - `===`
-- `!==`  
-```$collection->where('id', '<', 5)```  
+- `!==`    
 ### where(array $options): Collection
 Using this method you can specify array of rules, like in first two examples given. This is equivalent to calling the previous method.
 ```

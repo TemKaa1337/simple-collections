@@ -379,4 +379,20 @@ final class ArrayCollectionTest extends TestCase
             (new ArrayCollection($this->input))->where('a', 20)->sort('b', 'desc')->all()
         );
     }
+
+    public function testIsArrayIsCorrectAfterRejecting(): void
+    {
+        $this->assertEquals(
+            $this->input,
+            (new ArrayCollection($this->input))->reject(fn (array $elem): bool => $elem['a'] === 10)->all()
+        );
+
+        $this->assertEquals(
+            [
+                ['a' => 30, 'b' => 5],
+                ['a' => 77, 'b' => 66]
+            ],
+            (new ArrayCollection($this->input))->where('a', '>', 20)->reject(fn (array $elem): bool => $elem['a'] === 25)->all()
+        );
+    }
 }
