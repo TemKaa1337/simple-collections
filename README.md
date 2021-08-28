@@ -92,5 +92,5 @@ This function is opposite to function `isEmpty`.
 This method will return count of items in collection.  
 ```$collection->count()```  
 ### all(): array
-This method will return the result array.
+This method will return the result array.  
 ```$collection->all()```
