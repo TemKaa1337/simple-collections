@@ -82,6 +82,9 @@ Using this method you can delete items by any rule. In given example collection 
 ### sort(string $field, string $sortMethod = 'asc'): Collection
 Using this method you can sort the array.  
 ```$collection->sort('id', 'desc')```  
+### filter(callable $fn): Collection  
+Using this method you can filter collection using callback.  
+```$collection->filter(fn ($element) => $element['a'] + $element['b'] > 10)```  
 ### isEmpty(): bool
 Using this method you will know if the collection is empty.  
 ```$collection->isEmpty()```  
