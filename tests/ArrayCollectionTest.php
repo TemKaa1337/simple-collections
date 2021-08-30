@@ -408,4 +408,22 @@ final class ArrayCollectionTest extends TestCase
             (new ArrayCollection($this->input))->where('a', '>', 20)->reject(fn (array $elem): bool => $elem['a'] === 25)->count()
         );
     }
+
+    public function testCollectionInitializationThroughStaticMethod(): void
+    {
+        $this->assertEquals(
+            $this->input,
+            ArrayCollection::init($this->input)->all()
+        );
+    }
+
+    public function testFilter(): void
+    {
+        $this->assertEquals(
+            [
+                ['a' => 77, 'b' => 66]
+            ],
+            ArrayCollection::init($this->input)->where('a', '>', 25)->filter(fn (array $element): bool => $element['a'] + $element['b'] > 40)->all()
+        );
+    }
 }

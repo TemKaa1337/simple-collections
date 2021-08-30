@@ -12,6 +12,11 @@ class ObjectCollection
     {
         $this->collection = $array;
     }
+
+    public static function init(array $array): self
+    {
+        return new self($array);
+    }
     
     protected function getOperatorComparison(
         string $operator, 
@@ -161,6 +166,20 @@ class ObjectCollection
 
         usort($this->collection, $fn);
                             
+        return $this;
+    }
+
+    public function filter(callable $fn): self
+    {
+        $result = [];
+
+        foreach ($this->collection as $element) {
+            if ($fn($element))
+                $result[] = $element;
+        }
+
+        $this->collection = $result;
+
         return $this;
     }
     

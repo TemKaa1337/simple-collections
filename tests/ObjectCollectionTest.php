@@ -429,4 +429,22 @@ final class ObjectCollectionTest extends TestCase
             (new ObjectCollection($this->input))->where('a', '>', 20)->reject(fn (object $elem): bool => $elem->a === 25)->count()
         );
     }
+    
+    public function testCollectionInitializationThroughStaticMethod(): void
+    {
+        $this->setInput();
+        $this->assertEquals(
+            $this->input,
+            ObjectCollection::init($this->input)->all()
+        );
+    }
+    
+    public function testFilter(): void
+    {
+        $this->setInput();
+        $this->assertEquals(
+            [],
+            ObjectCollection::init($this->input)->where('a', '>', 25)->filter(fn (object $element): bool => $element->a + $element->b > 200)->all()
+        );
+    }
 }
