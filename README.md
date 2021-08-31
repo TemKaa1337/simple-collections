@@ -12,8 +12,8 @@ To install this package type ```composer require temkaa/simple-collections``` in
 ```
 <?php declare(strict_types = 1);
 
-use Temkaa\Collections\ArrayCollection;
-use Temkaa\Collections\ObjectCollection;
+use SimpleCollections\Collections\ArrayCollection;
+use SimpleCollections\Collections\ObjectCollection;
 
 class SomeClass
 {
