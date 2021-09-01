@@ -45,6 +45,9 @@ class SomeClass
 }
 ```
 ## Functionality
+### static init(array $array): ArrayCollection|ObjectCollection
+This method returns an instance of collection. If the provided array has incorrect format, then `InvalidInputFormatException` will be thrown.
+```Collection::init([])```
 ### where(string $fieldName, mixed $fieldValue): Collection
 Using this method you can retrieve array elements with specified value.  
 ```$collection->where('id', 2)```  
