@@ -187,6 +187,16 @@ class ArrayCollection
     {
         return count($this->collection);
     }
+    
+    public function first(): ?array
+    {
+        return $this->collection[0] ?? null;
+    }
+
+    public function last(): ?array
+    {
+        return $this->collection[count($this->collection) - 1] ?? null;
+    }
 
     public function all() : array
     {

@@ -12,8 +12,7 @@ To install this package type ```composer require temkaa/simple-collections``` in
 ```
 <?php declare(strict_types = 1);
 
-use SimpleCollections\Collections\ArrayCollection;
-use SimpleCollections\Collections\ObjectCollection;
+use SimpleCollections\Collections\Collection;
 
 class SomeClass
 {
@@ -26,7 +25,7 @@ class SomeClass
             ['product_id' => 2, 'product_name' => 'juice'],
         ];
 
-        $collection = new ArrayCollection($array);
+        $collection = Collection::init($array);
         var_dump(
             $collection->sortBy('id', 'desc')->all(),
             $collection->whereIn('product_id', [1, 2, 3])->all()
@@ -37,7 +36,7 @@ class SomeClass
     {
         $result = Database::all() // Some database query
         
-        $collection = new ObjectCollection($result);
+        $collection = Collection::init($result);
         var_dump(
             $collection->sortBy('id', 'desc')->all(),
             $collection->whereIn('product_id', [1, 2, 3])->all()
@@ -94,6 +93,12 @@ This function is opposite to function `isEmpty`.
 ### count(): array
 This method will return count of items in collection.  
 ```$collection->count()```  
+### first(): ?array|object
+This method will return first collection item (return type depends on if collection is object or array). If the collection is empty, `null` will be returned.  
+```$collection->first()```  
+### last(): ?array|object
+This method will return last collection item (return type depends on if collection is object or array). If the collection is empty, `null` will be returned.  
+```$collection->last()```  
 ### all(): array
 This method will return the result array.  
 ```$collection->all()```

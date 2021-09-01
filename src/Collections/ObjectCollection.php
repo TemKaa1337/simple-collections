@@ -188,6 +188,16 @@ class ObjectCollection
         return count($this->collection);
     }
 
+    public function first(): ?object
+    {
+        return $this->collection[0] ?? null;
+    }
+
+    public function last(): ?object
+    {
+        return $this->collection[count($this->collection) - 1] ?? null;
+    }
+
     public function all() : array
     {
         return $this->collection;

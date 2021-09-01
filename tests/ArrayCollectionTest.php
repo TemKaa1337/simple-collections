@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use SimpleCollections\Collections\ArrayCollection;
+use SimpleCollections\Collections\Collection;
 use SimpleCollections\Exceptions\InvalidOperatorException;
 
 final class ArrayCollectionTest extends TestCase
@@ -19,7 +19,7 @@ final class ArrayCollectionTest extends TestCase
     {
         $this->assertEquals(
             true,
-            (new ArrayCollection([]))->isEmpty()
+            Collection::init([])->isEmpty()
         );
     }
 
@@ -27,7 +27,7 @@ final class ArrayCollectionTest extends TestCase
     {
         $this->assertEquals(
             false,
-            (new ArrayCollection($this->input))->isEmpty()
+            Collection::init($this->input)->isEmpty()
         );
     }
 
@@ -39,7 +39,7 @@ final class ArrayCollectionTest extends TestCase
                 ['a' => 20, 'b' => 2],
                 ['a' => 20, 'b' => 59]
             ],
-            (new ArrayCollection($this->input))->where('a', 20)->all()
+            Collection::init($this->input)->where('a', 20)->all()
         );
     }
 
@@ -47,20 +47,20 @@ final class ArrayCollectionTest extends TestCase
     {
         $this->assertEquals(
             [],
-            (new ArrayCollection($this->input))->where('c', 20)->all()
+            Collection::init($this->input)->where('c', 20)->all()
         );
     }
 
     public function testIvalidOperandEquals(): void
     {
         $this->expectException(InvalidOperatorException::class);
-        (new ArrayCollection($this->input))->where('a', '=', 10)->all();
+        Collection::init($this->input)->where('a', '=', 10)->all();
     }
 
     public function testInvalidOperatorNotEquals(): void
     {
         $this->expectException(InvalidOperatorException::class);
-        (new ArrayCollection($this->input))->where('a', '!=', 20)->where('a', '!=', 30)->all();
+        Collection::init($this->input)->where('a', '!=', 20)->where('a', '!=', 30)->all();
     }
 
     public function testIsArrayMatchesAfterWhereMethodWith3Arguments(): void
@@ -71,7 +71,7 @@ final class ArrayCollectionTest extends TestCase
                 ['a' => 30, 'b' => 5],
                 ['a' => 77, 'b' => 66]
             ],
-            (new ArrayCollection($this->input))->where('a', '>', 20)->all()
+            Collection::init($this->input)->where('a', '>', 20)->all()
         );
 
         $this->assertEquals(
@@ -80,7 +80,7 @@ final class ArrayCollectionTest extends TestCase
                 ['a' => 30, 'b' => 5],
                 ['a' => 77, 'b' => 66]
             ],
-            (new ArrayCollection($this->input))->where('a', '>', 10)->where('a', '>', 20)->all()
+            Collection::init($this->input)->where('a', '>', 10)->where('a', '>', 20)->all()
         );
 
         $this->assertEquals(
@@ -89,7 +89,7 @@ final class ArrayCollectionTest extends TestCase
                 ['a' => 30, 'b' => 5],
                 ['a' => 77, 'b' => 66]
             ],
-            (new ArrayCollection($this->input))->where('a', '!==', 20)->all()
+            Collection::init($this->input)->where('a', '!==', 20)->all()
         );
 
         $this->assertEquals(
@@ -97,12 +97,12 @@ final class ArrayCollectionTest extends TestCase
                 ['a' => 25, 'b' => 25],
                 ['a' => 77, 'b' => 66]
             ],
-            (new ArrayCollection($this->input))->where('a', '!==', 20)->where('a', '!==', 30)->all()
+            Collection::init($this->input)->where('a', '!==', 20)->where('a', '!==', 30)->all()
         );
 
         $this->assertEquals(
             [],
-            (new ArrayCollection($this->input))->where('a', '<', 20)->all()
+            Collection::init($this->input)->where('a', '<', 20)->all()
         );
 
         $this->assertEquals(
@@ -112,7 +112,7 @@ final class ArrayCollectionTest extends TestCase
                 ['a' => 20, 'b' => 2],
                 ['a' => 20, 'b' => 59],
             ],
-            (new ArrayCollection($this->input))->where('a', '<', 70)->where('a', '<', 30)->all()
+            Collection::init($this->input)->where('a', '<', 70)->where('a', '<', 30)->all()
         );
 
         $this->assertEquals(
@@ -121,14 +121,14 @@ final class ArrayCollectionTest extends TestCase
                 ['a' => 20, 'b' => 2],
                 ['a' => 20, 'b' => 59],
             ],
-            (new ArrayCollection($this->input))->where('a', '==', 20)->all()
+            Collection::init($this->input)->where('a', '==', 20)->all()
         );
 
         $this->assertEquals(
             [                
                 ['a' => 20, 'b' => 20],
             ],
-            (new ArrayCollection($this->input))->where('a', '==', 20)->where('b', '==', 20)->all()
+            Collection::init($this->input)->where('a', '==', 20)->where('b', '==', 20)->all()
         );
 
         $this->assertEquals(
@@ -137,19 +137,19 @@ final class ArrayCollectionTest extends TestCase
                 ['a' => 20, 'b' => 2],
                 ['a' => 20, 'b' => 59],
             ],
-            (new ArrayCollection($this->input))->where('a', '===', 20)->all()
+            Collection::init($this->input)->where('a', '===', 20)->all()
         );
 
         $this->assertEquals(
             [                
                 ['a' => 20, 'b' => 20],
             ],
-            (new ArrayCollection($this->input))->where('a', '===', 20)->where('b', '===', 20)->all()
+            Collection::init($this->input)->where('a', '===', 20)->where('b', '===', 20)->all()
         );
 
         $this->assertEquals(
             $this->input,
-            (new ArrayCollection($this->input))->where('a', '>=', 20)->all()
+            Collection::init($this->input)->where('a', '>=', 20)->all()
         );
 
         $this->assertEquals(
@@ -157,7 +157,7 @@ final class ArrayCollectionTest extends TestCase
                 ['a' => 30, 'b' => 5],
                 ['a' => 77, 'b' => 66]
             ],
-            (new ArrayCollection($this->input))->where('a', '>=', 20)->where('a', '>=', 30)->all()
+            Collection::init($this->input)->where('a', '>=', 20)->where('a', '>=', 30)->all()
         );
 
         $this->assertEquals(
@@ -166,7 +166,7 @@ final class ArrayCollectionTest extends TestCase
                 ['a' => 20, 'b' => 2],
                 ['a' => 20, 'b' => 59],
             ],
-            (new ArrayCollection($this->input))->where('a', '<=', 20)->all()
+            Collection::init($this->input)->where('a', '<=', 20)->all()
         );
 
         $this->assertEquals(
@@ -177,7 +177,7 @@ final class ArrayCollectionTest extends TestCase
                 ['a' => 20, 'b' => 2],
                 ['a' => 20, 'b' => 59],
             ],
-            (new ArrayCollection($this->input))->where('a', '<=', 68)->where('a', '<=', 30)->all()
+            Collection::init($this->input)->where('a', '<=', 68)->where('a', '<=', 30)->all()
         );
 
         $this->assertEquals(
@@ -186,7 +186,7 @@ final class ArrayCollectionTest extends TestCase
                 ['a' => 30, 'b' => 5],
                 ['a' => 77, 'b' => 66]
             ],
-            (new ArrayCollection($this->input))->where('a', '<>', 20)->all()
+            Collection::init($this->input)->where('a', '<>', 20)->all()
         );
 
         $this->assertEquals(
@@ -194,7 +194,7 @@ final class ArrayCollectionTest extends TestCase
                 ['a' => 25, 'b' => 25],
                 ['a' => 77, 'b' => 66]
             ],
-            (new ArrayCollection($this->input))->where('a', '<>', 20)->where('a', '<>', 30)->all()
+            Collection::init($this->input)->where('a', '<>', 20)->where('a', '<>', 30)->all()
         );
     }
 
@@ -202,17 +202,17 @@ final class ArrayCollectionTest extends TestCase
     {
         $this->assertEquals(
             $this->input,
-            (new ArrayCollection($this->input))->where('a', '<>', null)->all()
+            Collection::init($this->input)->where('a', '<>', null)->all()
         );
         
         $this->assertEquals(
             $this->input,
-            (new ArrayCollection($this->input))->where('a', '!==', null)->all()
+            Collection::init($this->input)->where('a', '!==', null)->all()
         );
 
         $this->assertEquals(
             [],
-            (new ArrayCollection($this->input))->where('a', null)->all()
+            Collection::init($this->input)->where('a', null)->all()
         );
     }
     
@@ -224,7 +224,7 @@ final class ArrayCollectionTest extends TestCase
                 ['a' => 20, 'b' => 2],
                 ['a' => 20, 'b' => 59],
             ],
-            (new ArrayCollection($this->input))->where([
+            Collection::init($this->input)->where([
                 ['a', 20]
             ])->all()
         );
@@ -233,7 +233,7 @@ final class ArrayCollectionTest extends TestCase
             [
                 ['a' => 20, 'b' => 2]
             ],
-            (new ArrayCollection($this->input))->where([
+            Collection::init($this->input)->where([
                 ['a', 20],
                 ['b', 2]
             ])->all()
@@ -241,7 +241,7 @@ final class ArrayCollectionTest extends TestCase
         
         $this->assertEquals(
             [],
-            (new ArrayCollection($this->input))->where([
+            Collection::init($this->input)->where([
                 ['a', 20],
                 ['b', 2],
                 ['c', 10]
@@ -253,7 +253,7 @@ final class ArrayCollectionTest extends TestCase
     {  
         $this->assertEquals(
             [],
-            (new ArrayCollection($this->input))->where([
+            Collection::init($this->input)->where([
                 ['a', '<', 30],
                 ['b', '<=', 58],
                 ['c', '>', 20]
@@ -265,7 +265,7 @@ final class ArrayCollectionTest extends TestCase
                 ['a' => 25, 'b' => 25],
                 ['a' => 30, 'b' => 5]
             ],
-            (new ArrayCollection($this->input))->where([
+            Collection::init($this->input)->where([
                 ['a', '>', 20],
                 ['b', '<=', 25]
             ])->all()
@@ -276,7 +276,7 @@ final class ArrayCollectionTest extends TestCase
                 ['a' => 20, 'b' => 20],
                 ['a' => 20, 'b' => 59],
             ],
-            (new ArrayCollection($this->input))->where([
+            Collection::init($this->input)->where([
                 ['a', '===', 20],
                 ['b', '!==', 2]
             ])->all()
@@ -290,7 +290,7 @@ final class ArrayCollectionTest extends TestCase
                 ['a' => 20, 'b' => 20],
                 ['a' => 20, 'b' => 2]
             ],
-            (new ArrayCollection($this->input))->where([
+            Collection::init($this->input)->where([
                 ['a', 20],
                 ['b', '<=', 20]
             ])->all()
@@ -300,7 +300,7 @@ final class ArrayCollectionTest extends TestCase
             [
                 ['a' => 77, 'b' => 66]
             ],
-            (new ArrayCollection($this->input))->where([
+            Collection::init($this->input)->where([
                 ['a', '>', 20],
                 ['b', 66]
             ])->all()
@@ -316,7 +316,7 @@ final class ArrayCollectionTest extends TestCase
                 ['a' => 20, 'b' => 2],
                 ['a' => 20, 'b' => 59],
             ],
-            (new ArrayCollection($this->input))->whereIn('a', [20, 25])->all()
+            Collection::init($this->input)->whereIn('a', [20, 25])->all()
         );
     }
 
@@ -324,7 +324,7 @@ final class ArrayCollectionTest extends TestCase
     {
         $this->assertEquals(
             [],
-            (new ArrayCollection($this->input))->whereIn('a', [4, 6, 8])->all()
+            Collection::init($this->input)->whereIn('a', [4, 6, 8])->all()
         );
     }
 
@@ -332,7 +332,7 @@ final class ArrayCollectionTest extends TestCase
     {
         $this->assertEquals(
             [],
-            (new ArrayCollection($this->input))->whereIn('c', [20, 25])->all()
+            Collection::init($this->input)->whereIn('c', [20, 25])->all()
         );
     }
 
@@ -344,7 +344,7 @@ final class ArrayCollectionTest extends TestCase
                 ['a' => 20, 'b' => 2],
                 ['a' => 20, 'b' => 59]
             ],
-            (new ArrayCollection($this->input))->where('a', 20)->sort('c', 'asc')->all()
+            Collection::init($this->input)->where('a', 20)->sort('c', 'asc')->all()
         );
     }
     
@@ -352,7 +352,7 @@ final class ArrayCollectionTest extends TestCase
     {
         $this->assertEquals(
             [],
-            (new ArrayCollection($this->input))->where('с', 20)->sort('c', 'asc')->all()
+            Collection::init($this->input)->where('с', 20)->sort('c', 'asc')->all()
         );
     }
     
@@ -364,7 +364,7 @@ final class ArrayCollectionTest extends TestCase
                 ['a' => 20, 'b' => 20],
                 ['a' => 20, 'b' => 2]
             ],
-            (new ArrayCollection($this->input))->where('a', 20)->sort('b', 'asc')->all()
+            Collection::init($this->input)->where('a', 20)->sort('b', 'asc')->all()
         );
     }
 
@@ -376,7 +376,7 @@ final class ArrayCollectionTest extends TestCase
                 ['a' => 20, 'b' => 20],
                 ['a' => 20, 'b' => 59]
             ],
-            (new ArrayCollection($this->input))->where('a', 20)->sort('b', 'desc')->all()
+            Collection::init($this->input)->where('a', 20)->sort('b', 'desc')->all()
         );
     }
 
@@ -384,7 +384,7 @@ final class ArrayCollectionTest extends TestCase
     {
         $this->assertEquals(
             $this->input,
-            (new ArrayCollection($this->input))->reject(fn (array $elem): bool => $elem['a'] === 10)->all()
+            Collection::init($this->input)->reject(fn (array $elem): bool => $elem['a'] === 10)->all()
         );
 
         $this->assertEquals(
@@ -392,7 +392,7 @@ final class ArrayCollectionTest extends TestCase
                 ['a' => 30, 'b' => 5],
                 ['a' => 77, 'b' => 66]
             ],
-            (new ArrayCollection($this->input))->where('a', '>', 20)->reject(fn (array $elem): bool => $elem['a'] === 25)->all()
+            Collection::init($this->input)->where('a', '>', 20)->reject(fn (array $elem): bool => $elem['a'] === 25)->all()
         );
     }
 
@@ -400,12 +400,12 @@ final class ArrayCollectionTest extends TestCase
     {
         $this->assertEquals(
             6,
-            (new ArrayCollection($this->input))->count()
+            Collection::init($this->input)->count()
         );
 
         $this->assertEquals(
             2,
-            (new ArrayCollection($this->input))->where('a', '>', 20)->reject(fn (array $elem): bool => $elem['a'] === 25)->count()
+            Collection::init($this->input)->where('a', '>', 20)->reject(fn (array $elem): bool => $elem['a'] === 25)->count()
         );
     }
 
@@ -413,7 +413,7 @@ final class ArrayCollectionTest extends TestCase
     {
         $this->assertEquals(
             $this->input,
-            ArrayCollection::init($this->input)->all()
+            Collection::init($this->input)->all()
         );
     }
 
@@ -423,7 +423,38 @@ final class ArrayCollectionTest extends TestCase
             [
                 ['a' => 77, 'b' => 66]
             ],
-            ArrayCollection::init($this->input)->where('a', '>', 25)->filter(fn (array $element): bool => $element['a'] + $element['b'] > 40)->all()
+            Collection::init($this->input)->where('a', '>', 25)->filter(fn (array $element): bool => $element['a'] + $element['b'] > 40)->all()
+        );
+    }
+
+    public function testGetFirstElement(): void
+    {
+        $this->assertEquals(
+            ['a' => 30, 'b' => 5],
+            Collection::init($this->input)->where('a', '>', 25)->first()
+        );
+    }
+
+    public function testGetFirstElementInEmptyCollection(): void
+    {
+        $this->assertEquals(
+            null,
+            Collection::init([])->where('a', '>', 25)->first()
+        );
+    }
+
+    public function testGetLastElement(): void
+    {
+        $this->assertEquals(
+            ['a' => 77, 'b' => 66],
+            Collection::init($this->input)->where('a', '>', 25)->last()
+        );
+    }
+    public function testGetLastElementInEmptyCollection(): void
+    {
+        $this->assertEquals(
+            null,
+            Collection::init([])->where('a', '>', 25)->last()
         );
     }
 }
