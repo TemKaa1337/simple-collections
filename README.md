@@ -1,8 +1,6 @@
 Simple Collections
 ===
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.0-8892BF.svg?style=flat-square)](https://php.net/)
-[![Latest Stable Version](http://poser.pugx.org/temkaa/simple-collections/v)](https://packagist.org/packages/temkaa/simple-collections)
-[![Latest Unstable Version](http://poser.pugx.org/temkaa/simple-collections/v/unstable)](https://packagist.org/packages/temkaa/simple-collections)
 [![License](http://poser.pugx.org/temkaa/simple-collections/license)](https://packagist.org/packages/temkaa/simple-collections)
 [![Total Downloads](http://poser.pugx.org/temkaa/simple-collections/downloads)](https://packagist.org/packages/temkaa/simple-collections)
 ===
