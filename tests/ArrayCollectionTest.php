@@ -2,6 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 use SimpleCollections\Collections\Collection;
+use SimpleCollections\Exceptions\InvalidInputFormatException;
 use SimpleCollections\Exceptions\InvalidOperatorException;
 
 final class ArrayCollectionTest extends TestCase
@@ -450,11 +451,18 @@ final class ArrayCollectionTest extends TestCase
             Collection::init($this->input)->where('a', '>', 25)->last()
         );
     }
+
     public function testGetLastElementInEmptyCollection(): void
     {
         $this->assertEquals(
             null,
             Collection::init([])->where('a', '>', 25)->last()
         );
+    }
+
+    public function testIncorrentInputData(): void
+    {
+        $this->expectException(InvalidInputFormatException::class);
+        Collection::init(['asd', 'bsd'])->all();
     }
 }

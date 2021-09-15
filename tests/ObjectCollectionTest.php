@@ -3,6 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use SimpleCollections\Collections\Collection;
 use SimpleCollections\Exceptions\InvalidOperatorException;
+use SimpleCollections\Exceptions\InvalidInputFormatException;
 
 
 final class ObjectCollectionTest extends TestCase
@@ -479,5 +480,11 @@ final class ObjectCollectionTest extends TestCase
             null,
             Collection::init([])->where('a', '>', 25)->last()
         );
+    }
+
+    public function testIncorrentInputData(): void
+    {
+        $this->expectException(InvalidInputFormatException::class);
+        Collection::init(['asd', 'bsd'])->all();
     }
 }
