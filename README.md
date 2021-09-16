@@ -91,7 +91,7 @@ Using this method you will know if the collection is empty.
 ### isNotEmpty(): bool
 This function is opposite to function `isEmpty`.  
 ```$collection->isNotEmpty()```  
-### count(): array
+### count(): int
 This method will return count of items in collection.  
 ```$collection->count()```  
 ### first(): ?array|object
