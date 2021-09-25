@@ -3,45 +3,13 @@
 namespace SimpleCollections\Collections;
 
 use SimpleCollections\Exceptions\InvalidOperatorException;
+use SimpleCollections\BaseCollections\BaseCollection;
 
-class ObjectCollection
+class ObjectCollection extends BaseCollection
 {
-    private array $collection;
-
     public function __construct(array $array)
     {
         $this->collection = $array;
-    }
-
-    public static function init(array $array): self
-    {
-        return new self($array);
-    }
-    
-    protected function getOperatorComparison(
-        string $operator, 
-        mixed $firstOperand, 
-        mixed $secondOperand
-    ): bool
-    {
-        switch ($operator) {
-            case '==':  return $firstOperand == $secondOperand;
-            case '<>':  return $firstOperand != $secondOperand;
-            case '<':   return $firstOperand < $secondOperand;
-            case '>':   return $firstOperand > $secondOperand;
-            case '<=':  return $firstOperand <= $secondOperand;
-            case '>=':  return $firstOperand >= $secondOperand;
-            case '===': return $firstOperand === $secondOperand;
-            case '!==': return $firstOperand !== $secondOperand;
-        }
-    }
-
-    protected function operatorValid(mixed $operator): bool
-    {
-        return in_array($operator, [
-            '==', '<>', '<', '>', '<=',
-            '>=', '===', '!=='
-        ]);
     }
 
     public function where(
@@ -117,43 +85,6 @@ class ObjectCollection
         return $this;
     }
 
-    public function isEmpty(): bool
-    {
-        return count($this->collection) === 0;
-    }
-
-    public function isNotEmpty(): bool
-    {
-        return count($this->collection) !== 0;
-    }
-
-    public function map(callable $fn): array
-    {
-        $result = [];
-
-        foreach ($this->collection as $element) {
-            $result[] = $fn($element);
-        }
-
-        $this->collection = $result;
-
-        return $this->all();
-    }
-
-    public function reject(callable $fn): self
-    {
-        $result = [];
-
-        foreach ($this->collection as $element) {
-            if (!$fn($element))
-                $result[] = $element;
-        }
-
-        $this->collection = $result;
-
-        return $this;
-    }
-
     public function sort(string $field, string $sortMethod = 'asc'): self
     {
         $fn = function ($a, $b) use ($field, $sortMethod) {
@@ -167,39 +98,5 @@ class ObjectCollection
         usort($this->collection, $fn);
                             
         return $this;
-    }
-
-    public function filter(callable $fn): self
-    {
-        $result = [];
-
-        foreach ($this->collection as $element) {
-            if ($fn($element))
-                $result[] = $element;
-        }
-
-        $this->collection = $result;
-
-        return $this;
-    }
-    
-    public function count(): int
-    {
-        return count($this->collection);
-    }
-
-    public function first(): ?object
-    {
-        return $this->collection[0] ?? null;
-    }
-
-    public function last(): ?object
-    {
-        return $this->collection[count($this->collection) - 1] ?? null;
-    }
-
-    public function all() : array
-    {
-        return $this->collection;
     }
 }
