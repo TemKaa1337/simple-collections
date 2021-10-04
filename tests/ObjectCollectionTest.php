@@ -12,7 +12,7 @@ final class ObjectCollectionTest extends TestCase
     // to   a = 45, b = 55
     protected array $input;
 
-    public function setInput(): void
+    public function setStaticInput(): void
     {
         $result = [];
         $a = 20;
@@ -29,27 +29,59 @@ final class ObjectCollectionTest extends TestCase
         $this->input = $result;
     }
 
-    public function testIsCollectionEmptyWhenCollectionIsEmpty(): void
+    public function setDynamicInput(): void
     {
-        $this->setInput();
+        $result = [];
+        $a = 20;
+        $b = 80;
+
+        for ($i = 0; $i < 6; $i ++) {
+            $class = new class {
+                protected array $fields = [];
+
+                public function __set($field, $value)
+                {
+                    $this->fields[$field] = $value;
+                }
+
+                public function __get($field)
+                {
+                    return $this->fields[$field] ?? null;
+                }
+            };
+
+            $class->a = $a + $i * 5;
+            $class->b = $b - $i * 5;
+
+            $result[] = $class;
+        }
+
+        $this->input = $result;
+    }
+
+    // static properties
+
+    public function testIsCollectionEmptyWhenCollectionIsEmptyWithStaticProps(): void
+    {
+        $this->setStaticInput();
         $this->assertEquals(
             true,
             Collection::init([])->isEmpty()
         );
     }
 
-    public function testIsCollectionEmptyWhenCollectionIsNotEmpty(): void
+    public function testIsCollectionEmptyWhenCollectionIsNotEmptyWithStaticProps(): void
     {
-        $this->setInput();
+        $this->setStaticInput();
         $this->assertEquals(
             false,
             Collection::init($this->input)->isEmpty()
         );
     }
 
-    public function testIsArrayMatchesAfterWhereMethodWith2Arguments(): void
+    public function testIsArrayMatchesAfterWhereMethodWith2ArgumentsWithStaticProps(): void
     {
-        $this->setInput();
+        $this->setStaticInput();
         $this->assertEquals(
             [
                 $this->input[0]
@@ -58,32 +90,32 @@ final class ObjectCollectionTest extends TestCase
         );
     }
 
-    public function testIsArrayMatchesDefaultIfGivenKeyDoesntExist(): void
+    public function testIsArrayMatchesDefaultIfGivenKeyDoesntExistWithStaticProps(): void
     {
-        $this->setInput();
+        $this->setStaticInput();
         $this->assertEquals(
             [],
             Collection::init($this->input)->where('c', 20)->all()
         );
     }
 
-    public function testIvalidOperandEquals(): void
+    public function testIvalidOperandEqualsWithStaticProps(): void
     {
-        $this->setInput();
+        $this->setStaticInput();
         $this->expectException(InvalidOperatorException::class);
         Collection::init($this->input)->where('a', '=', 10)->all();
     }
 
-    public function testInvalidOperatorNotEquals(): void
+    public function testInvalidOperatorNotEqualsWithStaticProps(): void
     {
-        $this->setInput();
+        $this->setStaticInput();
         $this->expectException(InvalidOperatorException::class);
         Collection::init($this->input)->where('a', '!=', 20)->where('a', '!=', 30)->all();
     }
 
-    public function testIsArrayMatchesAfterWhereMethodWith3Arguments(): void
+    public function testIsArrayMatchesAfterWhereMethodWith3ArgumentsWithStaticProps(): void
     {
-        $this->setInput();
+        $this->setStaticInput();
         $this->assertEquals(
             [
                 $this->input[1],
@@ -219,7 +251,7 @@ final class ObjectCollectionTest extends TestCase
 
     public function testIsArrayMatchesAfterWhereMethodWithNullArguments(): void
     {
-        $this->setInput();
+        $this->setStaticInput();
         $this->assertEquals(
             $this->input,
             Collection::init($this->input)->where('a', '<>', null)->all()
@@ -236,9 +268,9 @@ final class ObjectCollectionTest extends TestCase
         );
     }
     
-    public function testIsArrayMatchesAfterWhereMethodWithArrayWith2Arguments(): void
+    public function testIsArrayMatchesAfterWhereMethodWithArrayWith2ArgumentsWithStaticProps(): void
     {
-        $this->setInput();
+        $this->setStaticInput();
         $this->assertEquals(
             [
                 $this->input[0]
@@ -266,9 +298,9 @@ final class ObjectCollectionTest extends TestCase
         );
     }
 
-    public function testIsArrayMatchesAfterWhereMethodWithArrayWith3Arguments(): void
+    public function testIsArrayMatchesAfterWhereMethodWithArrayWith3ArgumentsWithStaticProps(): void
     {  
-        $this->setInput();
+        $this->setStaticInput();
         $this->assertEquals(
             [],
             Collection::init($this->input)->where([
@@ -300,9 +332,9 @@ final class ObjectCollectionTest extends TestCase
         );
     }
 
-    public function testIsArrayMatchesAfterWhereMethodWithArrayWithMixedArguments(): void
+    public function testIsArrayMatchesAfterWhereMethodWithArrayWithMixedArgumentsWithStaticProps(): void
     {
-        $this->setInput();
+        $this->setStaticInput();
         $this->assertEquals(
             [],
             Collection::init($this->input)->where([
@@ -322,9 +354,9 @@ final class ObjectCollectionTest extends TestCase
         );
     }
 
-    public function testIsArrayMatchesAfterWhereInMethod(): void
+    public function testIsArrayMatchesAfterWhereInMethodWithStaticProps(): void
     {
-        $this->setInput();
+        $this->setStaticInput();
         $this->assertEquals(
             [
                 $this->input[0],
@@ -335,27 +367,27 @@ final class ObjectCollectionTest extends TestCase
         );
     }
 
-    public function testIsArrayEmptyIfNoValuesInWhereInMethodMatch(): void
+    public function testIsArrayEmptyIfNoValuesInWhereInMethodMatchWithStaticProps(): void
     {
-        $this->setInput();
+        $this->setStaticInput();
         $this->assertEquals(
             [],
             Collection::init($this->input)->whereIn('a', [4, 6, 8])->all()
         );
     }
 
-    public function testIsArrayEmptyIfKeyDoesntExistInWhereInMethod(): void
+    public function testIsArrayEmptyIfKeyDoesntExistInWhereInMethodWithStaticProps(): void
     {
-        $this->setInput();
+        $this->setStaticInput();
         $this->assertEquals(
             [],
             Collection::init($this->input)->whereIn('c', [20, 25])->all()
         );
     }
 
-    public function testIsArrayWithGivenValueExistAndSortedByKeyThatDoesntExist(): void
+    public function testIsArrayWithGivenValueExistAndSortedByKeyThatDoesntExistWithStaticProps(): void
     {
-        $this->setInput();
+        $this->setStaticInput();
         $this->assertEquals(
             [
                 $this->input[0],
@@ -364,18 +396,18 @@ final class ObjectCollectionTest extends TestCase
         );
     }
     
-    public function testIsArrayWithGivenValueDoesntExistAndSortedByKeyThatDoesntExist(): void
+    public function testIsArrayWithGivenValueDoesntExistAndSortedByKeyThatDoesntExistWithStaticProps(): void
     {
-        $this->setInput();
+        $this->setStaticInput();
         $this->assertEquals(
             [],
             Collection::init($this->input)->where('с', 20)->sort('c', 'asc')->all()
         );
     }
     
-    public function testIsArrayWithGivenValueExistsAndSortedByKeyThatExistsAsc(): void
+    public function testIsArrayWithGivenValueExistsAndSortedByKeyThatExistsAscWithStaticProps(): void
     {
-        $this->setInput();
+        $this->setStaticInput();
         $this->assertEquals(
             [
                 $this->input[0],
@@ -386,9 +418,9 @@ final class ObjectCollectionTest extends TestCase
         );
     }
 
-    public function testIsArrayWithGivenValueExistsAndSortedByKeyThatExistsDesc(): void
+    public function testIsArrayWithGivenValueExistsAndSortedByKeyThatExistsDescWithStaticProps(): void
     {
-        $this->setInput();
+        $this->setStaticInput();
         $this->assertEquals(
             [
                 $this->input[0]
@@ -397,9 +429,9 @@ final class ObjectCollectionTest extends TestCase
         );
     }
 
-    public function testIsObjectArrayIsCorrectAfterRejecting(): void
+    public function testIsObjectArrayIsCorrectAfterRejectingWithStaticProps(): void
     {
-        $this->setInput();
+        $this->setStaticInput();
 
         $this->assertEquals(
             $this->input,
@@ -417,9 +449,9 @@ final class ObjectCollectionTest extends TestCase
         );
     }
     
-    public function testCheckIfCountOfCollectionIsRight(): void
+    public function testCheckIfCountOfCollectionIsRightWithStaticProps(): void
     {
-        $this->setInput();
+        $this->setStaticInput();
         $this->assertEquals(
             6,
             Collection::init($this->input)->reject(fn (object $elem): bool => $elem->a === 10)->count()
@@ -431,34 +463,34 @@ final class ObjectCollectionTest extends TestCase
         );
     }
     
-    public function testCollectionInitializationThroughStaticMethod(): void
+    public function testCollectionInitializationThroughStaticMethodWithStaticProps(): void
     {
-        $this->setInput();
+        $this->setStaticInput();
         $this->assertEquals(
             $this->input,
             Collection::init($this->input)->all()
         );
     }
     
-    public function testFilter(): void
+    public function testFilterWithStaticProps(): void
     {
-        $this->setInput();
+        $this->setStaticInput();
         $this->assertEquals(
             [],
-            Collection::init($this->input)->where('a', '>', 25)->filter(fn (object $element): bool => $element->a + $element->b > 200)->all()
+            Collection::init($this->input)->where('a', '>', 25)->filter(fn (object $element): bool => ($element->a + $element->b) > 200)->all()
         );
     }
 
-    public function testGetFirstElement(): void
+    public function testGetFirstElementWithStaticProps(): void
     {
-        $this->setInput();
+        $this->setStaticInput();
         $this->assertEquals(
             $this->input[2],
             Collection::init($this->input)->where('a', '>', 25)->first()
         );
     }
 
-    public function testGetFirstElementInEmptyCollection(): void
+    public function testGetFirstElementInEmptyCollectionWithStaticProps(): void
     {
         $this->assertEquals(
             null,
@@ -466,15 +498,15 @@ final class ObjectCollectionTest extends TestCase
         );
     }
 
-    public function testGetLastElement(): void
+    public function testGetLastElementWithStaticProps(): void
     {
-        $this->setInput();
+        $this->setStaticInput();
         $this->assertEquals(
             $this->input[5],
             Collection::init($this->input)->where('a', '>', 25)->last()
         );
     }
-    public function testGetLastElementInEmptyCollection(): void
+    public function testGetLastElementInEmptyCollectionWithStaticProps(): void
     {
         $this->assertEquals(
             null,
@@ -482,7 +514,468 @@ final class ObjectCollectionTest extends TestCase
         );
     }
 
-    public function testIncorrentInputData(): void
+    public function testIncorrentInputDataWithStaticProps(): void
+    {
+        $this->expectException(InvalidInputFormatException::class);
+        Collection::init(['asd', 'bsd'])->all();
+    }
+
+    // dynamic properties
+
+    public function testIsCollectionEmptyWhenCollectionIsEmptyWithDynamicProps(): void
+    {
+        $this->setDynamicInput();
+        $this->assertEquals(
+            true,
+            Collection::init([], staticProps: false)->isEmpty()
+        );
+    }
+
+    public function testIsCollectionEmptyWhenCollectionIsNotEmptyWithDynamicProps(): void
+    {
+        $this->setDynamicInput();
+        $this->assertEquals(
+            false,
+            Collection::init($this->input, staticProps: false)->isEmpty()
+        );
+    }
+
+    public function testIsArrayMatchesAfterWhereMethodWith2ArgumentsWithDynamicProps(): void
+    {
+        $this->setDynamicInput();
+        $this->assertEquals(
+            [
+                $this->input[0]
+            ],
+            Collection::init($this->input, staticProps: false)->where('a', 20)->all()
+        );
+    }
+
+    public function testIsArrayMatchesDefaultIfGivenKeyDoesntExistWithDynamicProps(): void
+    {
+        $this->setDynamicInput();
+        $this->assertEquals(
+            [],
+            Collection::init($this->input, staticProps: false)->where('c', 20)->all()
+        );
+    }
+
+    public function testIvalidOperandEqualsWithDynamicProps(): void
+    {
+        $this->setDynamicInput();
+        $this->expectException(InvalidOperatorException::class);
+        Collection::init($this->input, staticProps: false)->where('a', '=', 10)->all();
+    }
+
+    public function testInvalidOperatorNotEqualsWithDynamicProps(): void
+    {
+        $this->setDynamicInput();
+        $this->expectException(InvalidOperatorException::class);
+        Collection::init($this->input, staticProps: false)->where('a', '!=', 20)->where('a', '!=', 30)->all();
+    }
+
+    public function testIsArrayMatchesAfterWhereMethodWith3ArgumentsWithDynamicProps(): void
+    {
+        $this->setDynamicInput();
+        $this->assertEquals(
+            [
+                $this->input[1],
+                $this->input[2],
+                $this->input[3],
+                $this->input[4],
+                $this->input[5],
+            ],
+            Collection::init($this->input, staticProps: false)->where('a', '>', 20)->all()
+        );
+
+        $this->assertEquals(
+            [
+                $this->input[1],
+                $this->input[2],
+                $this->input[3],
+                $this->input[4],
+                $this->input[5],
+            ],
+            Collection::init($this->input, staticProps: false)->where('a', '>', 10)->where('a', '>', 20)->all()
+        );
+
+        $this->assertEquals(
+            [
+                $this->input[1],
+                $this->input[2],
+                $this->input[3],
+                $this->input[4],
+                $this->input[5],
+            ],
+            Collection::init($this->input, staticProps: false)->where('a', '!==', 20)->all()
+        );
+
+        $this->assertEquals(
+            [
+                $this->input[1],
+                $this->input[3],
+                $this->input[4],
+                $this->input[5],
+            ],
+            Collection::init($this->input, staticProps: false)->where('a', '!==', 20)->where('a', '!==', 30)->all()
+        );
+
+        $this->assertEquals(
+            [],
+            Collection::init($this->input, staticProps: false)->where('a', '<', 20)->all()
+        );
+
+        $this->assertEquals(
+            [
+                $this->input[0],
+                $this->input[1],
+            ],
+            Collection::init($this->input, staticProps: false)->where('a', '<', 70)->where('a', '<', 30)->all()
+        );
+
+        $this->assertEquals(
+            [                
+                $this->input[0],
+            ],
+            Collection::init($this->input, staticProps: false)->where('a', '==', 20)->all()
+        );
+
+        $this->assertEquals(
+            [],
+            Collection::init($this->input, staticProps: false)->where('a', '==', 20)->where('b', '==', 20)->all()
+        );
+
+        $this->assertEquals(
+            [
+                $this->input[0],
+            ],
+            Collection::init($this->input, staticProps: false)->where('a', '===', 20)->all()
+        );
+
+        $this->assertEquals(
+            [],
+            Collection::init($this->input, staticProps: false)->where('a', '===', 20)->where('b', '===', 20)->all()
+        );
+
+        $this->assertEquals(
+            $this->input,
+            Collection::init($this->input, staticProps: false)->where('a', '>=', 20)->all()
+        );
+
+        $this->assertEquals(
+            [
+                $this->input[2],
+                $this->input[3],
+                $this->input[4],
+                $this->input[5],
+            ],
+            Collection::init($this->input, staticProps: false)->where('a', '>=', 20)->where('a', '>=', 30)->all()
+        );
+
+        $this->assertEquals(
+            [
+                $this->input[0]
+            ],
+            Collection::init($this->input, staticProps: false)->where('a', '<=', 20)->all()
+        );
+
+        $this->assertEquals(
+            [
+                $this->input[0],
+                $this->input[1],
+                $this->input[2]
+            ],
+            Collection::init($this->input, staticProps: false)->where('a', '<=', 68)->where('a', '<=', 30)->all()
+        );
+
+        $this->assertEquals(
+            [
+                $this->input[1],
+                $this->input[2],
+                $this->input[3],
+                $this->input[4],
+                $this->input[5],
+            ],
+            Collection::init($this->input, staticProps: false)->where('a', '<>', 20)->all()
+        );
+
+        $this->assertEquals(
+            [
+                $this->input[1],
+                $this->input[3],
+                $this->input[4],
+                $this->input[5],
+            ],
+            Collection::init($this->input, staticProps: false)->where('a', '<>', 20)->where('a', '<>', 30)->all()
+        );
+    }
+
+    public function testIsArrayMatchesAfterWhereMethodWithNullArgumentsWithDynamicPropsWithDynamicProps(): void
+    {
+        $this->setDynamicInput();
+        $this->assertEquals(
+            $this->input,
+            Collection::init($this->input, staticProps: false)->where('a', '<>', null)->all()
+        );
+        
+        $this->assertEquals(
+            $this->input,
+            Collection::init($this->input, staticProps: false)->where('a', '!==', null)->all()
+        );
+
+        $this->assertEquals(
+            [],
+            Collection::init($this->input, staticProps: false)->where('a', null)->all()
+        );
+    }
+    
+    public function testIsArrayMatchesAfterWhereMethodWithArrayWith2ArgumentsWithDynamicProps(): void
+    {
+        $this->setDynamicInput();
+        $this->assertEquals(
+            [
+                $this->input[0]
+            ],
+            Collection::init($this->input, staticProps: false)->where([
+                ['a', 20]
+            ])->all()
+        );
+        
+        $this->assertEquals(
+            [],
+            Collection::init($this->input, staticProps: false)->where([
+                ['a', 20],
+                ['b', 2]
+            ])->all()
+        );
+        
+        $this->assertEquals(
+            [],
+            Collection::init($this->input, staticProps: false)->where([
+                ['a', 20],
+                ['b', 2],
+                ['c', 10]
+            ])->all()
+        );
+    }
+
+    public function testIsArrayMatchesAfterWhereMethodWithArrayWith3ArgumentsWithDynamicProps(): void
+    {  
+        $this->setDynamicInput();
+        $this->assertEquals(
+            [],
+            Collection::init($this->input, staticProps: false)->where([
+                ['a', '<', 30],
+                ['b', '<=', 58],
+                ['c', '>', 20]
+            ])->all()
+        );
+        
+        $this->assertEquals(
+            [
+                $this->input[4],
+                $this->input[5],
+            ],
+            Collection::init($this->input, staticProps: false)->where([
+                ['a', '>', 20],
+                ['b', '<=', 60]
+            ])->all()
+        );
+        
+        $this->assertEquals(
+            [
+                $this->input[0]
+            ],
+            Collection::init($this->input, staticProps: false)->where([
+                ['a', '===', 20],
+                ['b', '!==', 2]
+            ])->all()
+        );
+    }
+
+    public function testIsArrayMatchesAfterWhereMethodWithArrayWithMixedArgumentsWithDynamicProps(): void
+    {
+        $this->setDynamicInput();
+        $this->assertEquals(
+            [],
+            Collection::init($this->input, staticProps: false)->where([
+                ['a', 20],
+                ['b', '<=', 20]
+            ])->all()
+        );
+        
+        $this->assertEquals(
+            [
+                $this->input[5],
+            ],
+            Collection::init($this->input, staticProps: false)->where([
+                ['a', '>', 20],
+                ['b', 55]
+            ])->all()
+        );
+    }
+
+    public function testIsArrayMatchesAfterWhereInMethodWithDynamicProps(): void
+    {
+        $this->setDynamicInput();
+        $this->assertEquals(
+            [
+                $this->input[0],
+                $this->input[1],
+                $this->input[2]
+            ],
+            Collection::init($this->input, staticProps: false)->whereIn('a', [20, 25, 30])->all()
+        );
+    }
+
+    public function testIsArrayEmptyIfNoValuesInWhereInMethodMatchWithDynamicProps(): void
+    {
+        $this->setDynamicInput();
+        $this->assertEquals(
+            [],
+            Collection::init($this->input, staticProps: false)->whereIn('a', [4, 6, 8])->all()
+        );
+    }
+
+    public function testIsArrayEmptyIfKeyDoesntExistInWhereInMethodWithDynamicProps(): void
+    {
+        $this->setDynamicInput();
+        $this->assertEquals(
+            [],
+            Collection::init($this->input, staticProps: false)->whereIn('c', [20, 25])->all()
+        );
+    }
+
+    public function testIsArrayWithGivenValueExistAndSortedByKeyThatDoesntExistWithDynamicProps(): void
+    {
+        $this->setDynamicInput();
+        $this->assertEquals(
+            [
+                $this->input[0],
+            ],
+            Collection::init($this->input, staticProps: false)->where('a', 20)->sort('c', 'asc')->all()
+        );
+    }
+    
+    public function testIsArrayWithGivenValueDoesntExistAndSortedByKeyThatDoesntExistWithDynamicProps(): void
+    {
+        $this->setDynamicInput();
+        $this->assertEquals(
+            [],
+            Collection::init($this->input, staticProps: false)->where('с', 20)->sort('c', 'asc')->all()
+        );
+    }
+    
+    public function testIsArrayWithGivenValueExistsAndSortedByKeyThatExistsAscWithDynamicProps(): void
+    {
+        $this->setDynamicInput();
+        $this->assertEquals(
+            [
+                $this->input[0],
+                $this->input[1],
+                $this->input[2]
+            ],
+            Collection::init($this->input, staticProps: false)->whereIn('a', [20, 25, 30])->sort('b', 'asc')->all()
+        );
+    }
+
+    public function testIsArrayWithGivenValueExistsAndSortedByKeyThatExistsDescWithDynamicProps(): void
+    {
+        $this->setDynamicInput();
+        $this->assertEquals(
+            [
+                $this->input[0]
+            ],
+            Collection::init($this->input, staticProps: false)->where('a', 20)->sort('b', 'desc')->all()
+        );
+    }
+
+    public function testIsObjectArrayIsCorrectAfterRejectingWithDynamicProps(): void
+    {
+        $this->setDynamicInput();
+
+        $this->assertEquals(
+            $this->input,
+            Collection::init($this->input, staticProps: false)->reject(fn (object $elem): bool => $elem->a === 10)->all()
+        );
+
+        $this->assertEquals(
+            [
+                $this->input[2],
+                $this->input[3],
+                $this->input[4],
+                $this->input[5]
+            ],
+            Collection::init($this->input, staticProps: false)->where('a', '>', 20)->reject(fn (object $elem): bool => $elem->a === 25)->all()
+        );
+    }
+    
+    public function testCheckIfCountOfCollectionIsRightWithDynamicProps(): void
+    {
+        $this->setDynamicInput();
+        $this->assertEquals(
+            6,
+            Collection::init($this->input, staticProps: false)->reject(fn (object $elem): bool => $elem->a === 10)->count()
+        );
+
+        $this->assertEquals(
+            4,
+            Collection::init($this->input, staticProps: false)->where('a', '>', 20)->reject(fn (object $elem): bool => $elem->a === 25)->count()
+        );
+    }
+    
+    public function testCollectionInitializationThroughStaticMethodWithDynamicProps(): void
+    {
+        $this->setDynamicInput();
+        $this->assertEquals(
+            $this->input,
+            Collection::init($this->input, staticProps: false)->all()
+        );
+    }
+    
+    public function testFilterWithDynamicProps(): void
+    {
+        $this->setDynamicInput();
+        $this->assertEquals(
+            [],
+            Collection::init($this->input, staticProps: false)->where('a', '>', 25)->filter(fn (object $element): bool => ($element->a + $element->b) > 200)->all()
+        );
+    }
+
+    public function testGetFirstElementWithDynamicProps(): void
+    {
+        $this->setDynamicInput();
+        $this->assertEquals(
+            $this->input[2],
+            Collection::init($this->input, staticProps: false)->where('a', '>', 25)->first()
+        );
+    }
+
+    public function testGetFirstElementInEmptyCollectionWithDynamicProps(): void
+    {
+        $this->assertEquals(
+            null,
+            Collection::init([], staticProps: false)->where('a', '>', 25)->first()
+        );
+    }
+
+    public function testGetLastElementWithDynamicProps(): void
+    {
+        $this->setDynamicInput();
+        $this->assertEquals(
+            $this->input[5],
+            Collection::init($this->input, staticProps: false)->where('a', '>', 25)->last()
+        );
+    }
+    public function testGetLastElementInEmptyCollectionWithDynamicProps(): void
+    {
+        $this->assertEquals(
+            null,
+            Collection::init([], staticProps: false)->where('a', '>', 25)->last()
+        );
+    }
+
+    public function testIncorrentInputDataWithDynamicProps(): void
     {
         $this->expectException(InvalidInputFormatException::class);
         Collection::init(['asd', 'bsd'])->all();

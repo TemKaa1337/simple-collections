@@ -7,9 +7,12 @@ use SimpleCollections\BaseCollections\BaseCollection;
 
 class ObjectCollection extends BaseCollection
 {
-    public function __construct(array $array)
+    private bool $staticProps;
+    
+    public function __construct(array $array, bool $staticProps)
     {
         $this->collection = $array;
+        $this->staticProps = $staticProps;
     }
 
     public function where(
@@ -34,7 +37,7 @@ class ObjectCollection extends BaseCollection
 
                     foreach ($this->collection as $element) {
                         if (
-                            isset($element->{$fieldOrArray})
+                            ($this->staticProps ? property_exists($element, $fieldOrArray) : true)
                             && $this->getOperatorComparison($valueOrOperator, $element->{$fieldOrArray}, $value)
                         ) {
                             $result[] = $element;
@@ -55,7 +58,7 @@ class ObjectCollection extends BaseCollection
 
         foreach ($this->collection as $element) {
             if (
-                isset($element->{$field})
+                ($this->staticProps ? property_exists($element, $field) : true)
                 && $element->{$field} === $value
             ) {
                 $result[] = $element;
@@ -73,7 +76,7 @@ class ObjectCollection extends BaseCollection
 
         foreach ($this->collection as $element) {
             if (
-                isset($element->{$field})
+                ($this->staticProps ? property_exists($element, $field) : true)
                 && in_array($element->{$field}, $values)
             ) {
                 $result[] = $element;
@@ -88,7 +91,15 @@ class ObjectCollection extends BaseCollection
     public function sort(string $field, string $sortMethod = 'asc'): self
     {
         $fn = function ($a, $b) use ($field, $sortMethod) {
-            if (!isset($a->{$field}) || !isset($b->{$field})) return -1;
+            // if (!isset($a->{$field}) || !isset($b->{$field})) return -1;
+            // if ($a->{$field} === $b->{$field}) return 0;
+
+            // if ($sortMethod === 'asc') return $a->{$field} < $b->{$field} ? 1 : -1;
+            // else return $a->{$field} > $b->{$field} ? 1 : -1;
+            if ($this->staticProps) {
+                if (!isset($a->{$field}) || !isset($b->{$field})) return -1;
+            }
+
             if ($a->{$field} === $b->{$field}) return 0;
 
             if ($sortMethod === 'asc') return $a->{$field} < $b->{$field} ? 1 : -1;
