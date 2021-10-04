@@ -34,14 +34,17 @@ class SomeClass
     {
         $result = Database::all() // Some database query
         
-        $collection = Collection::init($result);
+        $collection = Collection::init($result, staticProps: false);
         var_dump(
             $collection->sortBy('id', 'desc')->all(),
             $collection->whereIn('product_id', [1, 2, 3])->all()
         );
     }
 }
-```
+```  
+## Object collection types  
+Please note, that if you want to make an object collection with static properties then init collection with `Collection::init($arrayOfObjects)`  
+If you want to make an object collection with dynamic properties that doesn't exist or are accessed via `__get` method then init collection with `Collection::init($arrayOfObjects, staticProps: false)`  
 ## Functionality
 ### static init(array $array): ArrayCollection|ObjectCollection
 This method returns an instance of collection. If the provided array has incorrect format, then `InvalidInputFormatException` will be thrown.  
