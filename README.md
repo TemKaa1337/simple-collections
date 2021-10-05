@@ -97,10 +97,10 @@ This function is opposite to function `isEmpty`.
 ### count(): int
 This method will return count of items in collection.  
 ```$collection->count()```  
-### first(): ?array|object
+### first(): null|array|object
 This method will return first collection item (return type depends on if collection is object or array). If the collection is empty, `null` will be returned.  
 ```$collection->first()```  
-### last(): ?array|object
+### last(): null|array|object
 This method will return last collection item (return type depends on if collection is object or array). If the collection is empty, `null` will be returned.  
 ```$collection->last()```  
 ### all(): array
