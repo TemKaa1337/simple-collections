@@ -23,10 +23,9 @@ class SomeClass
             ['product_id' => 2, 'product_name' => 'juice'],
         ];
 
-        $collection = Collection::init($array);
         var_dump(
-            $collection->sortBy('id', 'desc')->all(),
-            $collection->whereIn('product_id', [1, 2, 3])->all()
+            Collection::init($array)->sortBy('id', 'desc')->all(),
+            Collection::init($array)->whereIn('product_id', [1, 2, 3])->all()
         );
     }
 
@@ -34,10 +33,9 @@ class SomeClass
     {
         $result = Database::all() // Some database query
         
-        $collection = Collection::init($result, staticProps: false);
         var_dump(
-            $collection->sortBy('id', 'desc')->all(),
-            $collection->whereIn('product_id', [1, 2, 3])->all()
+            Collection::init($result, staticProps: false)->sortBy('id', 'desc')->all(),
+            Collection::init($result, staticProps: false)->whereIn('product_id', [1, 2, 3])->all()
         );
     }
 }
@@ -78,7 +76,7 @@ Using this method you can get array of elements, which specified field value is 
 ```$collection->whereIn('id', [1, 2, 3])```  
 ### map(callable $function): array
 Using this function you can map through the array and cast the fiven function to all elements.  
-```$collection->map(fn ($element) => $element['id']```  
+```$collection->map(fn ($element) => $element['id'])```  
 ### reject(callable $function): Collection
 Using this method you can delete items by any rule. In given example collection will delete all elements, which `id` parameter equals to `2`  
 ```$collection->reject(fn ($element) => $element['id'] === 2)```  
