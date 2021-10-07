@@ -16,7 +16,7 @@ class Collection
             if (is_array($array[0])) {
                 return new ArrayCollection($array);
             } else if (is_object($array[0])) {
-                return new ObjectCollection($array, $staticProps);
+                return new ObjectCollection($array, staticProps: $staticProps);
             }
         }
 
