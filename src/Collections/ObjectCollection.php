@@ -91,13 +91,8 @@ class ObjectCollection extends BaseCollection
     public function sort(string $field, string $sortMethod = 'asc'): self
     {
         $fn = function ($a, $b) use ($field, $sortMethod) {
-            // if (!isset($a->{$field}) || !isset($b->{$field})) return -1;
-            // if ($a->{$field} === $b->{$field}) return 0;
-
-            // if ($sortMethod === 'asc') return $a->{$field} < $b->{$field} ? 1 : -1;
-            // else return $a->{$field} > $b->{$field} ? 1 : -1;
             if ($this->staticProps) {
-                if (!isset($a->{$field}) || !isset($b->{$field})) return -1;
+                if (!property_exists($a, $field) || !property_exists($b, $field)) return -1;
             }
 
             if ($a->{$field} === $b->{$field}) return 0;
