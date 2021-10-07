@@ -97,8 +97,8 @@ class ObjectCollection extends BaseCollection
 
             if ($a->{$field} === $b->{$field}) return 0;
 
-            if ($sortMethod === 'asc') return $a->{$field} < $b->{$field} ? 1 : -1;
-            else return $a->{$field} > $b->{$field} ? 1 : -1;
+            if ($sortMethod === 'asc') return $a->{$field} > $b->{$field} ? 1 : -1;
+            else return $a->{$field} < $b->{$field} ? 1 : -1;
         };
 
         usort($this->collection, $fn);

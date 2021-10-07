@@ -410,9 +410,9 @@ final class ObjectCollectionTest extends TestCase
         $this->setStaticInput();
         $this->assertEquals(
             [
-                $this->input[0],
+                $this->input[2],
                 $this->input[1],
-                $this->input[2]
+                $this->input[0]
             ],
             Collection::init($this->input)->whereIn('a', [20, 25, 30])->sort('b', 'asc')->all()
         );
@@ -871,9 +871,9 @@ final class ObjectCollectionTest extends TestCase
         $this->setDynamicInput();
         $this->assertEquals(
             [
-                $this->input[0],
+                $this->input[2],
                 $this->input[1],
-                $this->input[2]
+                $this->input[0]
             ],
             Collection::init($this->input, staticProps: false)->whereIn('a', [20, 25, 30])->sort('b', 'asc')->all()
         );

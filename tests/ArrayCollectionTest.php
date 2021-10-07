@@ -361,9 +361,9 @@ final class ArrayCollectionTest extends TestCase
     {
         $this->assertEquals(
             [
-                ['a' => 20, 'b' => 59],
+                ['a' => 20, 'b' => 2],
                 ['a' => 20, 'b' => 20],
-                ['a' => 20, 'b' => 2]
+                ['a' => 20, 'b' => 59]
             ],
             Collection::init($this->input)->where('a', 20)->sort('b', 'asc')->all()
         );
@@ -373,9 +373,9 @@ final class ArrayCollectionTest extends TestCase
     {
         $this->assertEquals(
             [
-                ['a' => 20, 'b' => 2],
+                ['a' => 20, 'b' => 59],
                 ['a' => 20, 'b' => 20],
-                ['a' => 20, 'b' => 59]
+                ['a' => 20, 'b' => 2]
             ],
             Collection::init($this->input)->where('a', 20)->sort('b', 'desc')->all()
         );
