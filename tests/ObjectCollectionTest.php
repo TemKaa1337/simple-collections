@@ -967,11 +967,37 @@ final class ObjectCollectionTest extends TestCase
             Collection::init($this->input, staticProps: false)->where('a', '>', 25)->last()
         );
     }
+
     public function testGetLastElementInEmptyCollectionWithDynamicProps(): void
     {
         $this->assertEquals(
             null,
             Collection::init([], staticProps: false)->where('a', '>', 25)->last()
+        );
+    }
+
+    public function testWhereClauseForNullField(): void
+    {
+        $class = new class {
+            protected array $fields;
+
+            public function __get(string $field): mixed
+            {
+                return $this->fields[$field] ?? null;
+            }
+
+            public function __set(string $field, mixed $value): void
+            {
+                $this->fields[$field] = $value;
+            }
+        };
+
+        $class->a = 20;
+        $class->b = null;
+
+        $this->assertEquals(
+            $class,
+            Collection::init([$class], staticProps: false)->where('a', 20)->where('b', null)->first()
         );
     }
 
