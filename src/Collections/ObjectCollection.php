@@ -77,7 +77,25 @@ class ObjectCollection extends BaseCollection
         foreach ($this->collection as $element) {
             if (
                 ($this->staticProps ? property_exists($element, $field) : true)
-                && in_array($element->{$field}, $values)
+                && in_array($element->{$field}, $values, strict: true)
+            ) {
+                $result[] = $element;
+            }
+        }
+
+        $this->collection = $result;
+
+        return $this;
+    }
+
+    public function whereNotIn(string $field, array $values): self
+    {
+        $result = [];
+
+        foreach ($this->collection as $element) {
+            if (
+                ($this->staticProps ? property_exists($element, $field) : true)
+                && !in_array($element->{$field}, $values, strict: true)
             ) {
                 $result[] = $element;
             }

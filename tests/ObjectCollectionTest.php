@@ -367,6 +367,19 @@ final class ObjectCollectionTest extends TestCase
         );
     }
 
+    public function testIsArrayMatchesAfterWhereNotInMethodWithStaticProps(): void
+    {
+        $this->setStaticInput();
+        $this->assertEquals(
+            [
+                $this->input[3],
+                $this->input[4],
+                $this->input[5]
+            ],
+            Collection::init($this->input)->whereNotIn('a', [20, 25, 30])->all()
+        );
+    }
+
     public function testIsArrayEmptyIfNoValuesInWhereInMethodMatchWithStaticProps(): void
     {
         $this->setStaticInput();

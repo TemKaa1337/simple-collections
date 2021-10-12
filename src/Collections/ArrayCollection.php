@@ -74,7 +74,25 @@ class ArrayCollection extends BaseCollection
         foreach ($this->collection as $element) {
             if (
                 isset($element[$field])
-                && in_array($element[$field], $values)
+                && in_array($element[$field], $values, strict: true)
+            ) {
+                $result[] = $element;
+            }
+        }
+
+        $this->collection = $result;
+
+        return $this;
+    }
+
+    public function whereNotIn(string $field, array $values): self
+    {
+        $result = [];
+
+        foreach ($this->collection as $element) {
+            if (
+                isset($element[$field])
+                && !in_array($element[$field], $values, strict: true)
             ) {
                 $result[] = $element;
             }

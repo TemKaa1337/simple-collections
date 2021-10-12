@@ -74,6 +74,9 @@ $collection->where([
 ### whereIn(string $fieldName, array $values): Collection
 Using this method you can get array of elements, which specified field value is in given array.  
 ```$collection->whereIn('id', [1, 2, 3])```  
+### whereNotIn(string $fieldName, array $values): Collection  
+Using this method you can get array of elements, which specified field value is not exist in given array.  
+```$collection->whereNotIn('id', [1, 2, 3])```  
 ### map(callable $function): array
 Using this function you can map through the array and cast the fiven function to all elements.  
 ```$collection->map(fn ($element) => $element['id'])```  

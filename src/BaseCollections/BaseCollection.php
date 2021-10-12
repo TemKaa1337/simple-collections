@@ -29,7 +29,7 @@ abstract class BaseCollection
         return in_array($operator, [
             '==', '<>', '<', '>', '<=',
             '>=', '===', '!=='
-        ]);
+        ], strict: true);
     }
 
     public function isEmpty(): bool

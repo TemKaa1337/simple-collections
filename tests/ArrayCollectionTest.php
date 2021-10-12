@@ -321,6 +321,17 @@ final class ArrayCollectionTest extends TestCase
         );
     }
 
+    public function testIsArrayMatchesAfterWhereNotInMethod(): void
+    {
+        $this->assertEquals(
+            [
+                ['a' => 30, 'b' => 5],
+                ['a' => 77, 'b' => 66]
+            ],
+            Collection::init($this->input)->whereNotIn('a', [20, 25])->all()
+        );
+    }
+
     public function testIsArrayEmptyIfNoValuesInWhereInMethodMatch(): void
     {
         $this->assertEquals(
