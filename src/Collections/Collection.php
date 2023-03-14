@@ -9,13 +9,16 @@ class Collection
 {
     public static function init(array $array, bool $staticProps = true): ArrayCollection|ObjectCollection
     {
-        if (empty($array))
+        if (empty($array)) {
             return new ArrayCollection($array);
+        }
 
         if (isset($array[0])) {
             if (is_array($array[0])) {
                 return new ArrayCollection($array);
-            } else if (is_object($array[0])) {
+            }
+
+            if (is_object($array[0])) {
                 return new ObjectCollection($array, staticProps: $staticProps);
             }
         }

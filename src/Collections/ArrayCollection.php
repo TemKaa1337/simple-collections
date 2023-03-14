@@ -22,37 +22,36 @@ class ArrayCollection extends BaseCollection
             foreach ($fieldOrArray as $condition) {
                 $this->where(...$condition);
             }
-        } else {
+
+            return $this;
+        }
+
+        $isOperatorValid = $this->operatorValid($valueOrOperator);
+        if (!$isOperatorValid && $value === null) {
+            return $this->whereExactly($fieldOrArray, $valueOrOperator);
+        }
+
+        if (!$isOperatorValid) {
+            throw new InvalidOperatorException('The provided compare operator is invalid');
+        }
+
+        $result = [];
+        foreach ($this->collection as $element) {
             if (
-                !$this->operatorValid($valueOrOperator)
-                && $value === null
+                isset($element[$fieldOrArray])
+                && $this->getOperatorComparison($valueOrOperator, $element[$fieldOrArray], $value)
             ) {
-                return $this->whereExactly($fieldOrArray, $valueOrOperator);
-            } else {
-                if ($this->operatorValid($valueOrOperator)) {
-                    $result = [];
-
-                    foreach ($this->collection as $element) {
-                        if (
-                            isset($element[$fieldOrArray])
-                            && $this->getOperatorComparison($valueOrOperator, $element[$fieldOrArray], $value)
-                        ) {
-                            $result[] = $element;
-                        }
-                    }
-
-                    $this->collection = $result;
-                } else throw new InvalidOperatorException('The provided compare operator is invalid');
+                $result[] = $element;
             }
         }
 
+        $this->collection = $result;
         return $this;
     }
 
     protected function whereExactly(string $field, mixed $value): self
     {
         $result = [];
-
         foreach ($this->collection as $element) {
             if (
                 isset($element[$field])
@@ -63,14 +62,12 @@ class ArrayCollection extends BaseCollection
         }
 
         $this->collection = $result;
-
         return $this;
     }
 
     public function whereIn(string $field, array $values): self
     {
         $result = [];
-
         foreach ($this->collection as $element) {
             if (
                 isset($element[$field])
@@ -81,14 +78,12 @@ class ArrayCollection extends BaseCollection
         }
 
         $this->collection = $result;
-
         return $this;
     }
 
     public function whereNotIn(string $field, array $values): self
     {
         $result = [];
-
         foreach ($this->collection as $element) {
             if (
                 isset($element[$field])
@@ -99,13 +94,12 @@ class ArrayCollection extends BaseCollection
         }
 
         $this->collection = $result;
-
         return $this;
     }
 
     public function sort(string $field, string $sortMethod = 'asc'): self
     {
-        $fn = function ($a, $b) use ($field, $sortMethod) {
+        $sortFunction = function ($a, $b) use ($field, $sortMethod): int {
             if (!isset($a[$field]) || !isset($b[$field])) return -1;
             if ($a[$field] === $b[$field]) return 0;
 
@@ -113,17 +107,16 @@ class ArrayCollection extends BaseCollection
             else return $a[$field] < $b[$field] ? 1 : -1;
         };
 
-        usort($this->collection, $fn);
-                            
+        usort($this->collection, $sortFunction);
         return $this;
     }
         
-    public function first(): ?array
+    public function first(): array|null
     {
         return $this->collection[0] ?? null;
     }
 
-    public function last(): ?array
+    public function last(): array|null
     {
         return $this->collection[count($this->collection) - 1] ?? null;
     }

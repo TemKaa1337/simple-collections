@@ -11,7 +11,7 @@
     "name": "temkaa/simple-collections",
     "description": "These are simple array and object collections that provide convinient methods to manipulate them.",
     "require": {
-        "php": ">=8.0"
+        "php": ">=8.2"
     },
     "autoload": {
         "classmap": [

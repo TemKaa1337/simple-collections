@@ -25,40 +25,42 @@ class ObjectCollection extends BaseCollection
             foreach ($fieldOrArray as $condition) {
                 $this->where(...$condition);
             }
-        } else {
+
+            return $this;
+        }
+
+        $isOperatorValid = $this->operatorValid($valueOrOperator);
+        if (
+            !$isOperatorValid
+            && $value === null
+        ) {
+            return $this->whereExactly($fieldOrArray, $valueOrOperator);
+        }
+
+        if (!$isOperatorValid) {
+            throw new InvalidOperatorException('The provided compare operator is invalid');
+        }
+
+        $result = [];
+        foreach ($this->collection as $element) {
             if (
-                !$this->operatorValid($valueOrOperator)
-                && $value === null
+                (!$this->staticProps || property_exists($element, $fieldOrArray))
+                && $this->getOperatorComparison($valueOrOperator, $element->{$fieldOrArray}, $value)
             ) {
-                return $this->whereExactly($fieldOrArray, $valueOrOperator);
-            } else {
-                if ($this->operatorValid($valueOrOperator)) {
-                    $result = [];
-
-                    foreach ($this->collection as $element) {
-                        if (
-                            ($this->staticProps ? property_exists($element, $fieldOrArray) : true)
-                            && $this->getOperatorComparison($valueOrOperator, $element->{$fieldOrArray}, $value)
-                        ) {
-                            $result[] = $element;
-                        }
-                    }
-
-                    $this->collection = $result;
-                } else throw new InvalidOperatorException('The provided compare operator is invalid');
+                $result[] = $element;
             }
         }
 
+        $this->collection = $result;
         return $this;
     }
 
     protected function whereExactly(string $field, mixed $value): self
     {
         $result = [];
-
         foreach ($this->collection as $element) {
             if (
-                ($this->staticProps ? property_exists($element, $field) : true)
+                (!$this->staticProps || property_exists($element, $field))
                 && $element->{$field} === $value
             ) {
                 $result[] = $element;
@@ -66,17 +68,15 @@ class ObjectCollection extends BaseCollection
         }
 
         $this->collection = $result;
-
         return $this;
     }
 
     public function whereIn(string $field, array $values): self
     {
         $result = [];
-
         foreach ($this->collection as $element) {
             if (
-                ($this->staticProps ? property_exists($element, $field) : true)
+                (!$this->staticProps || property_exists($element, $field))
                 && in_array($element->{$field}, $values, strict: true)
             ) {
                 $result[] = $element;
@@ -84,17 +84,15 @@ class ObjectCollection extends BaseCollection
         }
 
         $this->collection = $result;
-
         return $this;
     }
 
     public function whereNotIn(string $field, array $values): self
     {
         $result = [];
-
         foreach ($this->collection as $element) {
             if (
-                ($this->staticProps ? property_exists($element, $field) : true)
+                (!$this->staticProps || property_exists($element, $field))
                 && !in_array($element->{$field}, $values, strict: true)
             ) {
                 $result[] = $element;
@@ -102,13 +100,12 @@ class ObjectCollection extends BaseCollection
         }
 
         $this->collection = $result;
-
         return $this;
     }
 
     public function sort(string $field, string $sortMethod = 'asc'): self
     {
-        $fn = function ($a, $b) use ($field, $sortMethod) {
+        $sortFunction = function ($a, $b) use ($field, $sortMethod): int {
             if ($this->staticProps) {
                 if (!property_exists($a, $field) || !property_exists($b, $field)) return -1;
             }
@@ -119,8 +116,7 @@ class ObjectCollection extends BaseCollection
             else return $a->{$field} < $b->{$field} ? 1 : -1;
         };
 
-        usort($this->collection, $fn);
-                            
+        usort($this->collection, $sortFunction);
         return $this;
     }
 }
