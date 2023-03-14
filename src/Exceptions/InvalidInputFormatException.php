@@ -2,9 +2,4 @@
 
 namespace SimpleCollections\Exceptions;
 
-use Exception;
-
-class InvalidInputFormatException extends Exception
-{
-
-}
+class InvalidInputFormatException extends \Exception {}

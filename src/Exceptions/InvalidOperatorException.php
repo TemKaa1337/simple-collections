@@ -2,9 +2,4 @@
 
 namespace SimpleCollections\Exceptions;
 
-use Exception;
-
-class InvalidOperatorException extends Exception
-{
-
-}
+class InvalidOperatorException extends \Exception {}

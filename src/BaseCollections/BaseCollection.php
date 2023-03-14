@@ -45,41 +45,35 @@ abstract class BaseCollection
     public function map(callable $fn): array
     {
         $result = [];
-
         foreach ($this->collection as $element) {
             $result[] = $fn($element);
         }
 
         $this->collection = $result;
-
         return $this->all();
     }
 
     public function reject(callable $fn): self
     {
         $result = [];
-
         foreach ($this->collection as $element) {
             if (!$fn($element))
                 $result[] = $element;
         }
 
         $this->collection = $result;
-
         return $this;
     }
 
     public function filter(callable $fn): self
     {
         $result = [];
-
         foreach ($this->collection as $element) {
             if ($fn($element))
                 $result[] = $element;
         }
 
         $this->collection = $result;
-
         return $this;
     }
 

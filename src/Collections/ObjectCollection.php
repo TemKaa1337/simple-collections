@@ -19,7 +19,7 @@ class ObjectCollection extends BaseCollection
         string|array $fieldOrArray,
         mixed $valueOrOperator = null,
         mixed $value = null
-    ) : self
+    ): self
     {
         if (is_array($fieldOrArray)) {
             foreach ($fieldOrArray as $condition) {
