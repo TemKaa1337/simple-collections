@@ -3,3 +3,4 @@
 .gitignore export-ignore
 /tests export-ignore
 /.github export-ignore
+CODEOWNERS export-ignore
