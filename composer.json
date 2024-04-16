@@ -18,7 +18,8 @@
             "src/"
         ],
         "psr-4": {
-            "SimpleCollections\\": "src/"
+            "SimpleCollections\\": "src/",
+            "SimpleCollections\\Tests\\": "tests/"
         }
     },
     "require-dev": {
