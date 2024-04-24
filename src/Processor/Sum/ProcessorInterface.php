@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Processor\Sum;
+namespace Temkaa\SimpleCollections\Processor\Sum;
 
-use SimpleCollections\Model\SumCriteriaInterface;
+use Temkaa\SimpleCollections\Model\SumCriteriaInterface;
 
 interface ProcessorInterface
 {

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Provider;
+namespace Temkaa\SimpleCollections\Provider;
 
 use InvalidArgumentException;
-use SimpleCollections\Model\ConditionInterface;
-use SimpleCollections\Processor\Condition\CompareProcessor;
-use SimpleCollections\Processor\Condition\ExactlyProcessor;
-use SimpleCollections\Processor\Condition\ProcessorInterface;
+use Temkaa\SimpleCollections\Model\ConditionInterface;
+use Temkaa\SimpleCollections\Processor\Condition\CompareProcessor;
+use Temkaa\SimpleCollections\Processor\Condition\ExactlyProcessor;
+use Temkaa\SimpleCollections\Processor\Condition\ProcessorInterface;
 
 final readonly class ConditionProcessorProvider
 {

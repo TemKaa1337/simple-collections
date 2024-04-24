@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Model\Sort;
+namespace Temkaa\SimpleCollections\Model\Sort;
 
-use SimpleCollections\Enum\SortOrder;
-use SimpleCollections\Model\SortCriteriaInterface;
+use Temkaa\SimpleCollections\Enum\SortOrder;
+use Temkaa\SimpleCollections\Model\SortCriteriaInterface;
 
 final readonly class ByField implements SortCriteriaInterface
 {

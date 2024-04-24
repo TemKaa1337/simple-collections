@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Processor\Condition;
+namespace Temkaa\SimpleCollections\Processor\Condition;
 
-use SimpleCollections\Enum\ComparisonOperator;
-use SimpleCollections\Model\Condition\Compare;
-use SimpleCollections\Model\Condition\Exactly;
-use SimpleCollections\Model\ConditionInterface;
-use SimpleCollections\Trait\ValueRetrieverTrait;
+use Temkaa\SimpleCollections\Enum\ComparisonOperator;
+use Temkaa\SimpleCollections\Model\Condition\Compare;
+use Temkaa\SimpleCollections\Model\Condition\Exactly;
+use Temkaa\SimpleCollections\Model\ConditionInterface;
+use Temkaa\SimpleCollections\Trait\ValueRetrieverTrait;
 
 final class ExactlyProcessor implements ProcessorInterface
 {

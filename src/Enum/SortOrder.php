@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Enum;
+namespace Temkaa\SimpleCollections\Enum;
 
 enum SortOrder
 {

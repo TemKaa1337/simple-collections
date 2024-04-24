@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Collection;
+namespace Temkaa\SimpleCollections\Collection;
 
 use Countable;
 use IteratorAggregate;
-use SimpleCollections\Model\SumCriteriaInterface;
+use Temkaa\SimpleCollections\Model\SumCriteriaInterface;
 
 interface CollectionInterface extends ArrayableInterface,
     Countable,

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Processor\Sort;
+namespace Temkaa\SimpleCollections\Processor\Sort;
 
-use SimpleCollections\Enum\SortOrder;
-use SimpleCollections\Model\Sort\ByKeys;
-use SimpleCollections\Model\SortCriteriaInterface;
+use Temkaa\SimpleCollections\Enum\SortOrder;
+use Temkaa\SimpleCollections\Model\Sort\ByKeys;
+use Temkaa\SimpleCollections\Model\SortCriteriaInterface;
 
 final class ByKeysProcessor implements ProcessorInterface
 {

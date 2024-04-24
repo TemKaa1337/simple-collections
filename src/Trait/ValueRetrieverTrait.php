@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Trait;
+namespace Temkaa\SimpleCollections\Trait;
 
 use ReflectionClass;
 use ReflectionException;

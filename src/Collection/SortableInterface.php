@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Collection;
+namespace Temkaa\SimpleCollections\Collection;
 
-use SimpleCollections\Model\SortCriteriaInterface;
+use Temkaa\SimpleCollections\Model\SortCriteriaInterface;
 
 interface SortableInterface
 {

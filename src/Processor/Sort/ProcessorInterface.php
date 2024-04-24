@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Processor\Sort;
+namespace Temkaa\SimpleCollections\Processor\Sort;
 
-use SimpleCollections\Model\SortCriteriaInterface;
+use Temkaa\SimpleCollections\Model\SortCriteriaInterface;
 
 interface ProcessorInterface
 {

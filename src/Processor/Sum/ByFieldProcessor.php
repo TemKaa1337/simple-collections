@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Processor\Sum;
+namespace Temkaa\SimpleCollections\Processor\Sum;
 
-use SimpleCollections\Collection;
-use SimpleCollections\Model\Sum\ByField;
-use SimpleCollections\Model\SumCriteriaInterface;
-use SimpleCollections\Trait\ValueRetrieverTrait;
+use Temkaa\SimpleCollections\Collection;
+use Temkaa\SimpleCollections\Model\Sum\ByField;
+use Temkaa\SimpleCollections\Model\SumCriteriaInterface;
+use Temkaa\SimpleCollections\Trait\ValueRetrieverTrait;
 
 final class ByFieldProcessor implements ProcessorInterface
 {

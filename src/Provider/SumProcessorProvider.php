@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Provider;
+namespace Temkaa\SimpleCollections\Provider;
 
 use InvalidArgumentException;
-use SimpleCollections\Model\SumCriteriaInterface;
-use SimpleCollections\Processor\Sum\ByFieldProcessor;
-use SimpleCollections\Processor\Sum\DefaultProcessor;
-use SimpleCollections\Processor\Sum\ProcessorInterface;
+use Temkaa\SimpleCollections\Model\SumCriteriaInterface;
+use Temkaa\SimpleCollections\Processor\Sum\ByFieldProcessor;
+use Temkaa\SimpleCollections\Processor\Sum\DefaultProcessor;
+use Temkaa\SimpleCollections\Processor\Sum\ProcessorInterface;
 
 final readonly class SumProcessorProvider
 {

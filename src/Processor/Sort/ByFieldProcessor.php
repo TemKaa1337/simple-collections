@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Processor\Sort;
+namespace Temkaa\SimpleCollections\Processor\Sort;
 
 use ReflectionException;
-use SimpleCollections\Enum\SortOrder;
-use SimpleCollections\Model\Sort\ByField;
-use SimpleCollections\Model\SortCriteriaInterface;
-use SimpleCollections\Trait\ValueRetrieverTrait;
+use Temkaa\SimpleCollections\Enum\SortOrder;
+use Temkaa\SimpleCollections\Model\Sort\ByField;
+use Temkaa\SimpleCollections\Model\SortCriteriaInterface;
+use Temkaa\SimpleCollections\Trait\ValueRetrieverTrait;
 
 final class ByFieldProcessor implements ProcessorInterface
 {

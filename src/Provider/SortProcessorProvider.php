@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Provider;
+namespace Temkaa\SimpleCollections\Provider;
 
 use InvalidArgumentException;
-use SimpleCollections\Model\SortCriteriaInterface;
-use SimpleCollections\Processor\Sort\ByCallbackProcessor;
-use SimpleCollections\Processor\Sort\ByFieldProcessor;
-use SimpleCollections\Processor\Sort\ByKeysProcessor;
-use SimpleCollections\Processor\Sort\ByValuesProcessor;
-use SimpleCollections\Processor\Sort\ProcessorInterface;
+use Temkaa\SimpleCollections\Model\SortCriteriaInterface;
+use Temkaa\SimpleCollections\Processor\Sort\ByCallbackProcessor;
+use Temkaa\SimpleCollections\Processor\Sort\ByFieldProcessor;
+use Temkaa\SimpleCollections\Processor\Sort\ByKeysProcessor;
+use Temkaa\SimpleCollections\Processor\Sort\ByValuesProcessor;
+use Temkaa\SimpleCollections\Processor\Sort\ProcessorInterface;
 
 final readonly class SortProcessorProvider
 {

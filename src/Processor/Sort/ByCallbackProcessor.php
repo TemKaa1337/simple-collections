@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Processor\Sort;
+namespace Temkaa\SimpleCollections\Processor\Sort;
 
-use SimpleCollections\Model\Sort\ByCallback;
-use SimpleCollections\Model\SortCriteriaInterface;
+use Temkaa\SimpleCollections\Model\Sort\ByCallback;
+use Temkaa\SimpleCollections\Model\SortCriteriaInterface;
 
 final class ByCallbackProcessor implements ProcessorInterface
 {
