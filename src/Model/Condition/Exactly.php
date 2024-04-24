@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Model\Condition;
+namespace Temkaa\SimpleCollections\Model\Condition;
 
-use SimpleCollections\Model\ConditionInterface;
+use Temkaa\SimpleCollections\Model\ConditionInterface;
 
 final readonly class Exactly implements ConditionInterface
 {

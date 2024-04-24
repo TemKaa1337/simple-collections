@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Model\Sum;
+namespace Temkaa\SimpleCollections\Model\Sum;
 
-use SimpleCollections\Model\SumCriteriaInterface;
+use Temkaa\SimpleCollections\Model\SumCriteriaInterface;
 
 final readonly class ByField implements SumCriteriaInterface
 {

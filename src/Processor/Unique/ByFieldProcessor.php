@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Processor\Unique;
+namespace Temkaa\SimpleCollections\Processor\Unique;
 
-use SimpleCollections\Collection;
-use SimpleCollections\Model\Unique\ByField;
-use SimpleCollections\Model\UniqueCriteriaInterface;
-use SimpleCollections\Trait\ValueRetrieverTrait;
+use Temkaa\SimpleCollections\Collection;
+use Temkaa\SimpleCollections\Model\Unique\ByField;
+use Temkaa\SimpleCollections\Model\UniqueCriteriaInterface;
+use Temkaa\SimpleCollections\Trait\ValueRetrieverTrait;
 
 final class ByFieldProcessor implements ProcessorInterface
 {

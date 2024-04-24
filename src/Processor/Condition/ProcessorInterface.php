@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Processor\Condition;
+namespace Temkaa\SimpleCollections\Processor\Condition;
 
-use SimpleCollections\Model\ConditionInterface;
+use Temkaa\SimpleCollections\Model\ConditionInterface;
 
 interface ProcessorInterface
 {

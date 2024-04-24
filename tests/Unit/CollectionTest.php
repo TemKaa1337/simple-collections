@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Tests\Unit;
+namespace Tests\Unit;
 
-use SimpleCollections\Collection;
-use SimpleCollections\Collection\CollectionInterface;
-use SimpleCollections\Model\ConditionInterface;
-use SimpleCollections\Model\SortCriteriaInterface;
-use SimpleCollections\Model\SumCriteriaInterface;
-use SimpleCollections\Model\UniqueCriteriaInterface;
 use stdClass;
+use Temkaa\SimpleCollections\Collection;
+use Temkaa\SimpleCollections\Collection\CollectionInterface;
+use Temkaa\SimpleCollections\Model\ConditionInterface;
+use Temkaa\SimpleCollections\Model\SortCriteriaInterface;
+use Temkaa\SimpleCollections\Model\SumCriteriaInterface;
+use Temkaa\SimpleCollections\Model\UniqueCriteriaInterface;
 
 final class CollectionTest extends AbstractCollectionTest
 {

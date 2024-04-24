@@ -9,7 +9,7 @@
     ],
     "minimum-stability": "dev",
     "name": "temkaa/simple-collections",
-    "description": "These are simple array and object collections that provide convinient methods to manipulate them.",
+    "description": "These are simple array and object collections that provide convenient methods to manipulate them.",
     "require": {
         "php": ">=8.2"
     },
@@ -18,8 +18,8 @@
             "src/"
         ],
         "psr-4": {
-            "SimpleCollections\\": "src/",
-            "SimpleCollections\\Tests\\": "tests/"
+            "Temkaa\\SimpleCollections\\": "src/",
+            "Tests\\": "tests/"
         }
     },
     "require-dev": {

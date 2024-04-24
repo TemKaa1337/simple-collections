@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Tests\Stub;
+namespace Tests\Stub;
 
 final readonly class ClassWithProperty
 {

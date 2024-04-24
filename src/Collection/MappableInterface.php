@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Collection;
+namespace Temkaa\SimpleCollections\Collection;
 
 interface MappableInterface
 {

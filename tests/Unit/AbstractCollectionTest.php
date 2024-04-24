@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Tests\Unit;
+namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use SimpleCollections\Enum\ComparisonOperator;
-use SimpleCollections\Enum\SortOrder;
-use SimpleCollections\Model\Condition\Compare;
-use SimpleCollections\Model\Condition\Exactly;
-use SimpleCollections\Model\Sort\ByCallback;
-use SimpleCollections\Model\Sort\ByField;
-use SimpleCollections\Model\Sort\ByKeys;
-use SimpleCollections\Model\Sort\ByValues;
-use SimpleCollections\Model\Sum\ByField as SumByField;
-use SimpleCollections\Model\Unique\ByField as UniqueByField;
-use SimpleCollections\Tests\Stub\ClassWithProperty;
 use stdClass;
+use Temkaa\SimpleCollections\Enum\ComparisonOperator;
+use Temkaa\SimpleCollections\Enum\SortOrder;
+use Temkaa\SimpleCollections\Model\Condition\Compare;
+use Temkaa\SimpleCollections\Model\Condition\Exactly;
+use Temkaa\SimpleCollections\Model\Sort\ByCallback;
+use Temkaa\SimpleCollections\Model\Sort\ByField;
+use Temkaa\SimpleCollections\Model\Sort\ByKeys;
+use Temkaa\SimpleCollections\Model\Sort\ByValues;
+use Temkaa\SimpleCollections\Model\Sum\ByField as SumByField;
+use Temkaa\SimpleCollections\Model\Unique\ByField as UniqueByField;
+use Tests\Stub\ClassWithProperty;
 
 abstract class AbstractCollectionTest extends TestCase
 {

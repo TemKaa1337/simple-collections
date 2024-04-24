@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Collection;
+namespace Temkaa\SimpleCollections\Collection;
 
-use SimpleCollections\Model\ConditionInterface;
-use SimpleCollections\Model\UniqueCriteriaInterface;
+use Temkaa\SimpleCollections\Model\ConditionInterface;
+use Temkaa\SimpleCollections\Model\UniqueCriteriaInterface;
 
 interface FilterableInterface
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Model;
+namespace Temkaa\SimpleCollections\Model;
 
 interface ConditionInterface
 {

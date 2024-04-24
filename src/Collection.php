@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections;
+namespace Temkaa\SimpleCollections;
 
 use ArrayIterator;
-use SimpleCollections\Collection\CollectionInterface;
-use SimpleCollections\Model\ConditionInterface;
-use SimpleCollections\Model\SortCriteriaInterface;
-use SimpleCollections\Model\SumCriteriaInterface;
-use SimpleCollections\Model\UniqueCriteriaInterface;
-use SimpleCollections\Provider\ConditionProcessorProvider;
-use SimpleCollections\Provider\SortProcessorProvider;
-use SimpleCollections\Provider\SumProcessorProvider;
-use SimpleCollections\Provider\UniqueProcessorProvider;
+use Temkaa\SimpleCollections\Collection\CollectionInterface;
+use Temkaa\SimpleCollections\Model\ConditionInterface;
+use Temkaa\SimpleCollections\Model\SortCriteriaInterface;
+use Temkaa\SimpleCollections\Model\SumCriteriaInterface;
+use Temkaa\SimpleCollections\Model\UniqueCriteriaInterface;
+use Temkaa\SimpleCollections\Provider\ConditionProcessorProvider;
+use Temkaa\SimpleCollections\Provider\SortProcessorProvider;
+use Temkaa\SimpleCollections\Provider\SumProcessorProvider;
+use Temkaa\SimpleCollections\Provider\UniqueProcessorProvider;
 use Traversable;
 
 final class Collection implements CollectionInterface

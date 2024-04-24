@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Processor\Unique;
+namespace Temkaa\SimpleCollections\Processor\Unique;
 
-use SimpleCollections\Model\UniqueCriteriaInterface;
+use Temkaa\SimpleCollections\Model\UniqueCriteriaInterface;
 
 interface ProcessorInterface
 {

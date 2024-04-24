@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Model\Unique;
+namespace Temkaa\SimpleCollections\Model\Unique;
 
-use SimpleCollections\Model\UniqueCriteriaInterface;
+use Temkaa\SimpleCollections\Model\UniqueCriteriaInterface;
 
 final readonly class ByField implements UniqueCriteriaInterface
 {

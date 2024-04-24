@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Processor\Condition;
+namespace Temkaa\SimpleCollections\Processor\Condition;
 
 use LogicException;
-use SimpleCollections\Collection;
-use SimpleCollections\Enum\ComparisonOperator;
-use SimpleCollections\Model\Condition\Compare;
-use SimpleCollections\Model\ConditionInterface;
-use SimpleCollections\Trait\ValueRetrieverTrait;
+use Temkaa\SimpleCollections\Collection;
+use Temkaa\SimpleCollections\Enum\ComparisonOperator;
+use Temkaa\SimpleCollections\Model\Condition\Compare;
+use Temkaa\SimpleCollections\Model\ConditionInterface;
+use Temkaa\SimpleCollections\Trait\ValueRetrieverTrait;
 
 final class CompareProcessor implements ProcessorInterface
 {

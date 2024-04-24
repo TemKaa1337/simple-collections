@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Provider;
+namespace Temkaa\SimpleCollections\Provider;
 
 use InvalidArgumentException;
-use SimpleCollections\Model\UniqueCriteriaInterface;
-use SimpleCollections\Processor\Unique\ByFieldProcessor;
-use SimpleCollections\Processor\Unique\DefaultProcessor;
-use SimpleCollections\Processor\Unique\ProcessorInterface;
+use Temkaa\SimpleCollections\Model\UniqueCriteriaInterface;
+use Temkaa\SimpleCollections\Processor\Unique\ByFieldProcessor;
+use Temkaa\SimpleCollections\Processor\Unique\DefaultProcessor;
+use Temkaa\SimpleCollections\Processor\Unique\ProcessorInterface;
 
 final readonly class UniqueProcessorProvider
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace SimpleCollections\Model\Condition;
+namespace Temkaa\SimpleCollections\Model\Condition;
 
-use SimpleCollections\Enum\ComparisonOperator;
-use SimpleCollections\Model\ConditionInterface;
+use Temkaa\SimpleCollections\Enum\ComparisonOperator;
+use Temkaa\SimpleCollections\Model\ConditionInterface;
 
 final readonly class Compare implements ConditionInterface
 {
