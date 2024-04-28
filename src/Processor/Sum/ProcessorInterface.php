@@ -6,6 +6,9 @@ namespace Temkaa\SimpleCollections\Processor\Sum;
 
 use Temkaa\SimpleCollections\Model\SumCriteriaInterface;
 
+/**
+ * @internal
+ */
 interface ProcessorInterface
 {
     public function process(array $elements, ?SumCriteriaInterface $criteria): float|int;

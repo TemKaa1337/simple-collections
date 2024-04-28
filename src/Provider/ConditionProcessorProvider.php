@@ -10,6 +10,9 @@ use Temkaa\SimpleCollections\Processor\Condition\CompareProcessor;
 use Temkaa\SimpleCollections\Processor\Condition\ExactlyProcessor;
 use Temkaa\SimpleCollections\Processor\Condition\ProcessorInterface;
 
+/**
+ * @internal
+ */
 final readonly class ConditionProcessorProvider
 {
     public function __construct(

@@ -11,6 +11,9 @@ use Temkaa\SimpleCollections\Model\Condition\Compare;
 use Temkaa\SimpleCollections\Model\ConditionInterface;
 use Temkaa\SimpleCollections\Trait\ValueRetrieverTrait;
 
+/**
+ * @internal
+ */
 final class CompareProcessor implements ProcessorInterface
 {
     use ValueRetrieverTrait;

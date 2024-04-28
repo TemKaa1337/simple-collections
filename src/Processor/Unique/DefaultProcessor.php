@@ -6,6 +6,9 @@ namespace Temkaa\SimpleCollections\Processor\Unique;
 
 use Temkaa\SimpleCollections\Model\UniqueCriteriaInterface;
 
+/**
+ * @internal
+ */
 final class DefaultProcessor implements ProcessorInterface
 {
     public function process(array $elements, ?UniqueCriteriaInterface $criteria): array

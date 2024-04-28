@@ -10,6 +10,9 @@ use Temkaa\SimpleCollections\Model\Sort\ByField;
 use Temkaa\SimpleCollections\Model\SortCriteriaInterface;
 use Temkaa\SimpleCollections\Trait\ValueRetrieverTrait;
 
+/**
+ * @internal
+ */
 final class ByFieldProcessor implements ProcessorInterface
 {
     use ValueRetrieverTrait;

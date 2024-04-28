@@ -10,6 +10,9 @@ use Temkaa\SimpleCollections\Processor\Unique\ByFieldProcessor;
 use Temkaa\SimpleCollections\Processor\Unique\DefaultProcessor;
 use Temkaa\SimpleCollections\Processor\Unique\ProcessorInterface;
 
+/**
+ * @internal
+ */
 final readonly class UniqueProcessorProvider
 {
     public function __construct(

@@ -9,6 +9,9 @@ use Temkaa\SimpleCollections\Model\Sum\ByField;
 use Temkaa\SimpleCollections\Model\SumCriteriaInterface;
 use Temkaa\SimpleCollections\Trait\ValueRetrieverTrait;
 
+/**
+ * @internal
+ */
 final class ByFieldProcessor implements ProcessorInterface
 {
     use ValueRetrieverTrait;

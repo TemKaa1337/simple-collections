@@ -12,6 +12,9 @@ use Temkaa\SimpleCollections\Processor\Sort\ByKeysProcessor;
 use Temkaa\SimpleCollections\Processor\Sort\ByValuesProcessor;
 use Temkaa\SimpleCollections\Processor\Sort\ProcessorInterface;
 
+/**
+ * @internal
+ */
 final readonly class SortProcessorProvider
 {
     public function __construct(

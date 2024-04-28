@@ -7,6 +7,9 @@ namespace Temkaa\SimpleCollections\Trait;
 use ReflectionClass;
 use ReflectionException;
 
+/**
+ * @internal
+ */
 trait ValueRetrieverTrait
 {
     /**

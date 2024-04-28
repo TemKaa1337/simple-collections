@@ -9,6 +9,9 @@ use Temkaa\SimpleCollections\Model\Unique\ByField;
 use Temkaa\SimpleCollections\Model\UniqueCriteriaInterface;
 use Temkaa\SimpleCollections\Trait\ValueRetrieverTrait;
 
+/**
+ * @internal
+ */
 final class ByFieldProcessor implements ProcessorInterface
 {
     use ValueRetrieverTrait;

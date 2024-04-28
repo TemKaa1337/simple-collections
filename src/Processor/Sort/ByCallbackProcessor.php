@@ -7,6 +7,9 @@ namespace Temkaa\SimpleCollections\Processor\Sort;
 use Temkaa\SimpleCollections\Model\Sort\ByCallback;
 use Temkaa\SimpleCollections\Model\SortCriteriaInterface;
 
+/**
+ * @internal
+ */
 final class ByCallbackProcessor implements ProcessorInterface
 {
     /**

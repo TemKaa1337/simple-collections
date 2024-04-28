@@ -10,6 +10,9 @@ use Temkaa\SimpleCollections\Model\Condition\Exactly;
 use Temkaa\SimpleCollections\Model\ConditionInterface;
 use Temkaa\SimpleCollections\Trait\ValueRetrieverTrait;
 
+/**
+ * @internal
+ */
 final class ExactlyProcessor implements ProcessorInterface
 {
     use ValueRetrieverTrait;
