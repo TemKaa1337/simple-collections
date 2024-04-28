@@ -10,6 +10,9 @@ use Temkaa\SimpleCollections\Processor\Sum\ByFieldProcessor;
 use Temkaa\SimpleCollections\Processor\Sum\DefaultProcessor;
 use Temkaa\SimpleCollections\Processor\Sum\ProcessorInterface;
 
+/**
+ * @internal
+ */
 final readonly class SumProcessorProvider
 {
     public function __construct(

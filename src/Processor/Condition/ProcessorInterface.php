@@ -6,6 +6,9 @@ namespace Temkaa\SimpleCollections\Processor\Condition;
 
 use Temkaa\SimpleCollections\Model\ConditionInterface;
 
+/**
+ * @internal
+ */
 interface ProcessorInterface
 {
     public function process(array $elements, ConditionInterface $condition): array;

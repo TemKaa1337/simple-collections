@@ -8,6 +8,9 @@ use Temkaa\SimpleCollections\Enum\SortOrder;
 use Temkaa\SimpleCollections\Model\Sort\ByValues;
 use Temkaa\SimpleCollections\Model\SortCriteriaInterface;
 
+/**
+ * @internal
+ */
 final class ByValuesProcessor implements ProcessorInterface
 {
     /**

@@ -4,3 +4,4 @@
 /tests export-ignore
 /.github export-ignore
 CODEOWNERS export-ignore
+CHANGELOG.md export-ignore
