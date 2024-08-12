@@ -8,12 +8,14 @@ use Countable;
 use IteratorAggregate;
 use Temkaa\SimpleCollections\Model\SumCriteriaInterface;
 
-interface CollectionInterface extends ArrayableInterface,
+interface CollectionInterface extends
+    ArrayableInterface,
     Countable,
     EnumerableInterface,
     FilterableInterface,
     FullnessInterface,
     IteratorAggregate,
+    MakableInterface,
     MappableInterface,
     SortableInterface
 {

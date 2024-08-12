@@ -18,6 +18,11 @@ use Traversable;
 
 final class Collection implements CollectionInterface
 {
+    public static function make(array $elements): CollectionInterface
+    {
+        return new self($elements);
+    }
+
     public function __construct(
         private array $elements,
     ) {
