@@ -15,7 +15,7 @@ interface CollectionInterface extends
     FilterableInterface,
     FullnessInterface,
     IteratorAggregate,
-    MakableInterface,
+    MakeableInterface,
     MappableInterface,
     SortableInterface
 {
