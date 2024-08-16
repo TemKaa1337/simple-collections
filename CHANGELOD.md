@@ -1,3 +1,7 @@
+### 0.0.4
+##### Features:
+- Added infection to project.
+
 ### v0.0.3
 ##### Fixes:
 - Fixed some typos in interface names.

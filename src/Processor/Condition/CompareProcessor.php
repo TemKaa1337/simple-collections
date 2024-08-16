@@ -28,22 +28,10 @@ final class CompareProcessor implements ProcessorInterface
         $callback = function (mixed $element) use ($condition, $valueRetriever): bool {
             $retrievedValue = $valueRetriever($element);
 
-            return match ($condition->operator) {
-                ComparisonOperator::Equals         => $retrievedValue === $condition->value,
-                ComparisonOperator::Greater        => $retrievedValue > $condition->value,
-                ComparisonOperator::GreaterOrEqual => $retrievedValue >= $condition->value,
-                ComparisonOperator::In             => in_array($retrievedValue, $condition->value, strict: true),
-                ComparisonOperator::NotIn          => !in_array($retrievedValue, $condition->value, strict: true),
-                ComparisonOperator::Less           => $retrievedValue < $condition->value,
-                ComparisonOperator::LessOrEqual    => $retrievedValue <= $condition->value,
-                ComparisonOperator::NotEquals      => $retrievedValue !== $condition->value,
-                default                            => throw new LogicException(
-                    "Condition \"{$condition->operator->name}\" is not implemented.",
-                ),
-            };
+            return $this->compare($retrievedValue, $condition);
         };
 
-        return (new Collection($elements))
+        return Collection::make($elements)
             ->filter($callback)
             ->toArray();
     }
@@ -51,5 +39,22 @@ final class CompareProcessor implements ProcessorInterface
     public function supports(ConditionInterface $condition): bool
     {
         return $condition instanceof Compare;
+    }
+
+    private function compare(mixed $value, Compare $condition): bool
+    {
+        return match ($condition->operator) {
+            ComparisonOperator::Equals         => $value === $condition->value,
+            ComparisonOperator::Greater        => $value > $condition->value,
+            ComparisonOperator::GreaterOrEqual => $value >= $condition->value,
+            ComparisonOperator::In             => in_array($value, $condition->value, strict: true),
+            ComparisonOperator::NotIn          => !in_array($value, $condition->value, strict: true),
+            ComparisonOperator::Less           => $value < $condition->value,
+            ComparisonOperator::LessOrEqual    => $value <= $condition->value,
+            ComparisonOperator::NotEquals      => $value !== $condition->value,
+            default                            => throw new LogicException(
+                "Condition \"{$condition->operator->name}\" is not implemented.",
+            ),
+        };
     }
 }

@@ -21,5 +21,8 @@ jobs:
       - name: Install dependencies
         run: composer install --no-progress
 
-      - name: Run test suite
+      - name: Run Unit tests
         run: ./vendor/bin/phpunit --testsuite units
+
+      - name: Run Mutation tests
+        run: ./vendor/bin/infection --threads=2 --logger-github

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use stdClass;
 use Temkaa\SimpleCollections\Collection;
 use Temkaa\SimpleCollections\Collection\CollectionInterface;
@@ -12,11 +13,9 @@ use Temkaa\SimpleCollections\Model\SortCriteriaInterface;
 use Temkaa\SimpleCollections\Model\SumCriteriaInterface;
 use Temkaa\SimpleCollections\Model\UniqueCriteriaInterface;
 
-final class CollectionTest extends AbstractCollectionTest
+final class CollectionTest extends AbstractCollectionTestCase
 {
-    /**
-     * @dataProvider getDataForAddTest
-     */
+    #[DataProvider('getDataForAddTest')]
     public function testAdd(array $sourceElements, array $resultElements, mixed $element, int|string|null $key): void
     {
         $collection = new Collection($sourceElements);
@@ -25,9 +24,7 @@ final class CollectionTest extends AbstractCollectionTest
         self::assertEquals($resultElements, $collection->toArray());
     }
 
-    /**
-     * @dataProvider getDataForChunkTest
-     */
+    #[DataProvider('getDataForChunkTest')]
     public function testChunk(array $sourceElements, array $resultElements, int $size): void
     {
         $chunks = array_map(
@@ -38,9 +35,7 @@ final class CollectionTest extends AbstractCollectionTest
         self::assertEquals($resultElements, $chunks);
     }
 
-    /**
-     * @dataProvider getDataForCountTest
-     */
+    #[DataProvider('getDataForCountTest')]
     public function testCount(array $elements, int $expectedCount): void
     {
         self::assertEquals($expectedCount, (new Collection($elements))->count());
@@ -80,80 +75,73 @@ final class CollectionTest extends AbstractCollectionTest
         );
     }
 
-    /**
-     * @dataProvider getDataForFilterTest
-     */
+    #[DataProvider('getDataForFilterTest')]
     public function testFiler(array $sourceElements, array $resultElements, callable $callback): void
     {
         self::assertEquals($resultElements, (new Collection($sourceElements))->filter($callback)->toArray());
     }
 
-    /**
-     * @dataProvider getDataForFirstTest
-     */
+    #[DataProvider('getDataForFirstTest')]
     public function testFirst(array $elements, ?int $expectedValue): void
     {
         self::assertEquals($expectedValue, (new Collection($elements))->first());
     }
 
-    /**
-     * @dataProvider getDataForHasTest
-     */
+    public function testFlatten(): void
+    {
+
+    }
+
+    #[DataProvider('getDataForHasTest')]
     public function testHas(array $elements, mixed $element, bool $has): void
     {
         self::assertEquals($has, (new Collection($elements))->has($element));
     }
 
-    /**
-     * @dataProvider getDataForIsEmptyTest
-     */
+    #[DataProvider('getDataForIsEmptyTest')]
     public function testIsEmpty(array $elements, bool $expectedResult): void
     {
         self::assertEquals($expectedResult, (new Collection($elements))->isEmpty());
     }
 
-    /**
-     * @dataProvider getDataForIsNotEmptyTest
-     */
+    #[DataProvider('getDataForIsNotEmptyTest')]
     public function testIsNotEmpty(array $elements, bool $expectedResult): void
     {
         self::assertEquals($expectedResult, (new Collection($elements))->isNotEmpty());
     }
 
-    /**
-     * @dataProvider getDataForLastTest
-     */
+    #[DataProvider('getDataForLastTest')]
     public function testLast(array $elements, ?int $expectedValue): void
     {
         self::assertEquals($expectedValue, (new Collection($elements))->last());
     }
 
-    /**
-     * @dataProvider getDataForMapTest
-     */
+    #[DataProvider('getDataForMapTest')]
     public function testMap(array $sourceElements, array $resultElements, callable $callback): void
     {
         self::assertEquals($resultElements, (new Collection($sourceElements))->map($callback)->toArray());
     }
 
-    /**
-     * @dataProvider getDataForMergeTest
-     */
+    #[DataProvider('getDataForMergeTest')]
     public function testMerge(
         array $sourceElements,
         array $mergeElements,
         array $resultElements,
         bool $isRecursive,
     ): void {
+        // needed to pass infection mutation testing for default isRecursive parameter change
+        $collection = new Collection($sourceElements);
+        $resultCollection = $isRecursive
+            ? $collection->merge(new Collection($mergeElements), true)
+            : $collection->merge(new Collection($mergeElements));
+
         self::assertEquals(
             $resultElements,
-            (new Collection($sourceElements))->merge(new Collection($mergeElements), $isRecursive)->toArray(),
+            $resultCollection->toArray(),
         );
     }
 
-    /**
-     * @dataProvider getDataForRemoveTest
-     */
+    #[DataProvider('getDataForRemoveTest')]
     public function testRemove(array $sourceElements, array $resultElements, mixed $element): void
     {
         $collection = new Collection($sourceElements);
@@ -162,17 +150,13 @@ final class CollectionTest extends AbstractCollectionTest
         self::assertEquals($resultElements, $collection->toArray());
     }
 
-    /**
-     * @dataProvider getDataForSliceTest
-     */
+    #[DataProvider('getDataForSliceTest')]
     public function testSlice(array $sourceElements, array $resultElements, int $offset, ?int $length): void
     {
         self::assertEquals($resultElements, (new Collection($sourceElements))->slice($offset, $length)->toArray());
     }
 
-    /**
-     * @dataProvider getDataForSortByCallbackTest
-     */
+    #[DataProvider('getDataForSortByCallbackTest')]
     public function testSortByCallback(
         array $sourceElements,
         array $resultElements,
@@ -181,25 +165,19 @@ final class CollectionTest extends AbstractCollectionTest
         self::assertEquals($resultElements, (new Collection($sourceElements))->sort($criteria)->toArray());
     }
 
-    /**
-     * @dataProvider getDataForSortByFieldTest
-     */
+    #[DataProvider('getDataForSortByFieldTest')]
     public function testSortByField(array $sourceElements, array $resultElements, SortCriteriaInterface $criteria): void
     {
         self::assertEquals($resultElements, (new Collection($sourceElements))->sort($criteria)->toArray());
     }
 
-    /**
-     * @dataProvider getDataForSortByKeysTest
-     */
+    #[DataProvider('getDataForSortByKeysTest')]
     public function testSortByKeys(array $sourceElements, array $resultElements, SortCriteriaInterface $criteria): void
     {
         self::assertEquals($resultElements, (new Collection($sourceElements))->sort($criteria)->toArray());
     }
 
-    /**
-     * @dataProvider getDataForSortByValuesTest
-     */
+    #[DataProvider('getDataForSortByValuesTest')]
     public function testSortByValues(
         array $sourceElements,
         array $resultElements,
@@ -208,17 +186,13 @@ final class CollectionTest extends AbstractCollectionTest
         self::assertEquals($resultElements, (new Collection($sourceElements))->sort($criteria)->toArray());
     }
 
-    /**
-     * @dataProvider getDataForSumByFieldTest
-     */
+    #[DataProvider('getDataForSumByFieldTest')]
     public function testSumByField(array $elements, SumCriteriaInterface $criteria, float|int $expectedSum): void
     {
         self::assertEquals($expectedSum, (new Collection($elements))->sum($criteria));
     }
 
-    /**
-     * @dataProvider getDataForSumDefaultTest
-     */
+    #[DataProvider('getDataForSumDefaultTest')]
     public function testSumDefault(array $elements, float|int $expectedSum): void
     {
         self::assertEquals($expectedSum, (new Collection($elements))->sum());
@@ -231,9 +205,7 @@ final class CollectionTest extends AbstractCollectionTest
         self::assertEquals($elements, (new Collection($elements))->toArray());
     }
 
-    /**
-     * @dataProvider getDataForUniqueByFieldTest
-     */
+    #[DataProvider('getDataForUniqueByFieldTest')]
     public function testUniqueByField(
         array $sourceElements,
         array $resultElements,
@@ -242,25 +214,19 @@ final class CollectionTest extends AbstractCollectionTest
         self::assertEquals($resultElements, (new Collection($sourceElements))->unique($criteria)->toArray());
     }
 
-    /**
-     * @dataProvider getDataForUniqueDefaultTest
-     */
+    #[DataProvider('getDataForUniqueDefaultTest')]
     public function testUniqueDefault(array $sourceElements, array $resultElements): void
     {
         self::assertEquals($resultElements, (new Collection($sourceElements))->unique()->toArray());
     }
 
-    /**
-     * @dataProvider getDataForWhereCompareTest
-     */
+    #[DataProvider('getDataForWhereCompareTest')]
     public function testWhereCompare(array $sourceElements, array $resultElements, ConditionInterface $condition): void
     {
         self::assertEquals($resultElements, (new Collection($sourceElements))->where($condition)->toArray());
     }
 
-    /**
-     * @dataProvider getDataForWhereExactlyTest
-     */
+    #[DataProvider('getDataForWhereExactlyTest')]
     public function testWhereExactly(array $sourceElements, array $resultElements, ConditionInterface $condition): void
     {
         self::assertEquals($resultElements, (new Collection($sourceElements))->where($condition)->toArray());
