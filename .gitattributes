@@ -7,3 +7,4 @@ CODEOWNERS export-ignore
 CHANGELOG.md export-ignore
 Makefile export-ignore
 phpunit.xml.dist export-ignore
+infection.json.dist export-ignore

@@ -25,7 +25,7 @@ final class ByFieldProcessor implements ProcessorInterface
 
         $valueRetriever = $this->retrieveCallable($criteria->field);
 
-        (new Collection($elements))
+        Collection::make($elements)
             ->each(function (mixed $element) use (&$sum, $valueRetriever): true {
                 $sum += $valueRetriever($element);
 

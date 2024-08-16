@@ -18,7 +18,7 @@ use Temkaa\SimpleCollections\Model\Sum\ByField as SumByField;
 use Temkaa\SimpleCollections\Model\Unique\ByField as UniqueByField;
 use Tests\Stub\ClassWithProperty;
 
-abstract class AbstractCollectionTest extends TestCase
+abstract class AbstractCollectionTestCase extends TestCase
 {
     public static function getDataForAddTest(): iterable
     {
@@ -130,6 +130,7 @@ abstract class AbstractCollectionTest extends TestCase
     public static function getDataForRemoveTest(): iterable
     {
         yield [[1, 2, 3], [1, 2], 3];
+        yield [[1, 2, 3], [1, 3], 2];
         yield [[1, 2, 3], [1, 2, 3], 4];
 
         $el1 = new stdClass();
@@ -164,7 +165,19 @@ abstract class AbstractCollectionTest extends TestCase
 
             return $a > $b ? -1 : 1;
         };
-        yield [['c' => 8, 'b' => 9, 'a' => 10], ['a' => 10, 'b' => 9, 'c' => 8], new ByCallback($callback)];
+        yield [['c' => 10, 'b' => 8, 'a' => 9], ['c' => 10, 'a' => 9, 'b' => 8], new ByCallback($callback)];
+        $callback = static function (string $a, string $b): int {
+            if ($a === $b) {
+                return 0;
+            }
+
+            return $a > $b ? -1 : 1;
+        };
+        yield [
+            ['c' => 10, 'b' => 8, 'a' => 9],
+            ['a' => 9, 'b' => 8, 'c' => 10],
+            new ByCallback($callback, sortValues: false),
+        ];
 
         $callback = static function (int $a, int $b): int {
             if ($a === $b) {
@@ -261,7 +274,7 @@ abstract class AbstractCollectionTest extends TestCase
     public static function getDataForSortByKeysTest(): iterable
     {
         yield [['c' => 8, 'b' => 9, 'a' => 10], ['a' => 10, 'b' => 9, 'c' => 8], new ByKeys(SortOrder::Asc)];
-        yield [['c' => 10, 'b' => 9, 'a' => 8], ['c' => 10, 'b' => 9, 'a' => 8], new ByKeys(SortOrder::Desc)];
+        yield [['a' => 10, 'b' => 9, 'c' => 8], ['c' => 8, 'b' => 9, 'a' => 10], new ByKeys(SortOrder::Desc)];
     }
 
     public static function getDataForSortByValuesTest(): iterable

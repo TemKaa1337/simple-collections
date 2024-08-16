@@ -36,7 +36,7 @@ final class ByFieldProcessor implements ProcessorInterface
             return true;
         };
 
-        return (new Collection($elements))
+        return Collection::make($elements)
             ->filter($callback)
             ->toArray();
     }

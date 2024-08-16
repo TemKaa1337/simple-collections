@@ -140,7 +140,8 @@ final class Collection implements CollectionInterface
 
         $elements = $this->elements;
 
-        $key = array_is_list($elements)
+        $isList = array_is_list($elements);
+        $key = $isList
             ? array_search($value, $elements, strict: true)
             : $value;
 
@@ -148,7 +149,7 @@ final class Collection implements CollectionInterface
 
         unset($this->elements[$key]);
 
-        if (array_is_list($this->elements)) {
+        if ($isList) {
             $this->elements = array_values($this->elements);
         }
 
