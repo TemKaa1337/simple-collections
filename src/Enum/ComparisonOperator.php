@@ -7,11 +7,11 @@ namespace Temkaa\SimpleCollections\Enum;
 enum ComparisonOperator
 {
     case Equals;
-    case Greater;
-    case GreaterOrEqual;
+    case GreaterThan;
+    case GreaterThanOrEqual;
     case In;
-    case Less;
-    case LessOrEqual;
+    case LessThan;
+    case LessThanOrEqual;
     case NotEquals;
     case NotIn;
 }

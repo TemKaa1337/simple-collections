@@ -353,12 +353,12 @@ abstract class AbstractCollectionTestCase extends TestCase
         yield [
             [['a' => 1], ['a' => 2], ['a' => 3]],
             [['a' => 3]],
-            new Compare(field: 'a', operator: ComparisonOperator::Greater, value: 2),
+            new Compare(field: 'a', operator: ComparisonOperator::GreaterThan, value: 2),
         ];
         yield [
             [['a' => 1], ['a' => 2], ['a' => 3]],
             [['a' => 2], ['a' => 3]],
-            new Compare(field: 'a', operator: ComparisonOperator::GreaterOrEqual, value: 2),
+            new Compare(field: 'a', operator: ComparisonOperator::GreaterThanOrEqual, value: 2),
         ];
         yield [
             [['a' => 1], ['a' => 2], ['a' => 3]],
@@ -378,12 +378,12 @@ abstract class AbstractCollectionTestCase extends TestCase
         yield [
             [['a' => 1], ['a' => 2], ['a' => 3]],
             [['a' => 1]],
-            new Compare(field: 'a', operator: ComparisonOperator::Less, value: 2),
+            new Compare(field: 'a', operator: ComparisonOperator::LessThan, value: 2),
         ];
         yield [
             [['a' => 1], ['a' => 2], ['a' => 3]],
             [['a' => 1], ['a' => 2]],
-            new Compare(field: 'a', operator: ComparisonOperator::LessOrEqual, value: 2),
+            new Compare(field: 'a', operator: ComparisonOperator::LessThanOrEqual, value: 2),
         ];
 
         $el1 = new stdClass();
@@ -395,12 +395,12 @@ abstract class AbstractCollectionTestCase extends TestCase
         yield [
             [$el1, $el2, $el3],
             [$el3],
-            new Compare(field: 'test', operator: ComparisonOperator::Greater, value: 2),
+            new Compare(field: 'test', operator: ComparisonOperator::GreaterThan, value: 2),
         ];
         yield [
             [$el1, $el2, $el3],
             [$el2, $el3],
-            new Compare(field: 'test', operator: ComparisonOperator::GreaterOrEqual, value: 2),
+            new Compare(field: 'test', operator: ComparisonOperator::GreaterThanOrEqual, value: 2),
         ];
         yield [
             [$el1, $el2, $el3],
@@ -420,12 +420,12 @@ abstract class AbstractCollectionTestCase extends TestCase
         yield [
             [$el1, $el2, $el3],
             [$el1],
-            new Compare(field: 'test', operator: ComparisonOperator::Less, value: 2),
+            new Compare(field: 'test', operator: ComparisonOperator::LessThan, value: 2),
         ];
         yield [
             [$el1, $el2, $el3],
             [$el1, $el2],
-            new Compare(field: 'test', operator: ComparisonOperator::LessOrEqual, value: 2),
+            new Compare(field: 'test', operator: ComparisonOperator::LessThanOrEqual, value: 2),
         ];
     }
 

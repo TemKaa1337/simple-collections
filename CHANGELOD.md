@@ -1,3 +1,8 @@
+### 0.0.5
+##### Fixes:
+- Renamed `Greater`, `GreaterOrEqual`, `Less` and `LessOrEqual` to `GreaterThan`, `GreaterThanOrEqual`, `LessThan`
+and `LessOrEqual` respectively.
+
 ### 0.0.4
 ##### Features:
 - Added infection to project.

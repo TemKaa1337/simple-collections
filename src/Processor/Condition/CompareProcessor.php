@@ -44,15 +44,15 @@ final class CompareProcessor implements ProcessorInterface
     private function compare(mixed $value, Compare $condition): bool
     {
         return match ($condition->operator) {
-            ComparisonOperator::Equals         => $value === $condition->value,
-            ComparisonOperator::Greater        => $value > $condition->value,
-            ComparisonOperator::GreaterOrEqual => $value >= $condition->value,
-            ComparisonOperator::In             => in_array($value, $condition->value, strict: true),
-            ComparisonOperator::NotIn          => !in_array($value, $condition->value, strict: true),
-            ComparisonOperator::Less           => $value < $condition->value,
-            ComparisonOperator::LessOrEqual    => $value <= $condition->value,
-            ComparisonOperator::NotEquals      => $value !== $condition->value,
-            default                            => throw new LogicException(
+            ComparisonOperator::Equals             => $value === $condition->value,
+            ComparisonOperator::GreaterThan        => $value > $condition->value,
+            ComparisonOperator::GreaterThanOrEqual => $value >= $condition->value,
+            ComparisonOperator::In                 => in_array($value, $condition->value, strict: true),
+            ComparisonOperator::NotIn              => !in_array($value, $condition->value, strict: true),
+            ComparisonOperator::LessThan           => $value < $condition->value,
+            ComparisonOperator::LessThanOrEqual    => $value <= $condition->value,
+            ComparisonOperator::NotEquals          => $value !== $condition->value,
+            default                                => throw new LogicException(
                 "Condition \"{$condition->operator->name}\" is not implemented.",
             ),
         };
