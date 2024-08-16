@@ -4,8 +4,13 @@ Simple Collections
 [![License](http://poser.pugx.org/temkaa/simple-collections/license)](https://packagist.org/packages/temkaa/simple-collections)
 [![Total Downloads](http://poser.pugx.org/temkaa/simple-collections/downloads)](https://packagist.org/packages/temkaa/simple-collections)
 
-# These are simple array and object collections that provide convenient methods to manipulate collections;
-To install this package type ```composer require temkaa/simple-collections``` in your project root directory.
+# This project offers a collection that provide convenient methods to manipulate your data.
+
+## Installation:
+```php
+composer require temkaa/simple-collections
+```
+
 ## Quickstart
 ```php
 <?php declare(strict_types = 1);
