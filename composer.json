@@ -7,7 +7,7 @@
             "email": "temkaawork@gmail.com"
         }
     ],
-    "keywords": ["array","collection", "collections"],
+    "keywords": ["array", "collection", "collections"],
     "minimum-stability": "dev",
     "name": "temkaa/simple-collections",
     "description": "These are simple array and object collections that provide convenient methods to manipulate them.",
