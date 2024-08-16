@@ -4,7 +4,7 @@ Simple Collections
 # This project offers a collection that provide convenient methods to manipulate your data.
 
 ## Installation:
-```php
+```composer
 composer require temkaa/simple-collections
 ```
 
