@@ -1,8 +1,5 @@
 Simple Collections
 ===
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.0-8892BF.svg?style=flat-square)](https://php.net/)
-[![License](http://poser.pugx.org/temkaa/simple-collections/license)](https://packagist.org/packages/temkaa/simple-collections)
-[![Total Downloads](http://poser.pugx.org/temkaa/simple-collections/downloads)](https://packagist.org/packages/temkaa/simple-collections)
 
 # This project offers a collection that provide convenient methods to manipulate your data.
 
@@ -36,7 +33,7 @@ class SomeClass
         var_dump(
             (new Collection($products))->sort(new ByField('name', SortOrder::Desc))->toArray(),
             (new Collection($products))
-                ->where(new Compare(field: 'name', operator: ComparisonOperator::Greater, value: 2))
+                ->where(new Compare(field: 'name', operator: ComparisonOperator::GreaterThan, value: 2))
                 ->toArray(),
             (new Collection($products))->where(new Exactly(field: 'id', value: 1))->toArray(),
         );
