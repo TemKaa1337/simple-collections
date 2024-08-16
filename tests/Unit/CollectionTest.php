@@ -87,11 +87,6 @@ final class CollectionTest extends AbstractCollectionTestCase
         self::assertEquals($expectedValue, (new Collection($elements))->first());
     }
 
-    public function testFlatten(): void
-    {
-
-    }
-
     #[DataProvider('getDataForHasTest')]
     public function testHas(array $elements, mixed $element, bool $has): void
     {
